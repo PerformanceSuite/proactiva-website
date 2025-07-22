@@ -1,0 +1,1449 @@
+        // Mobile menu toggle (basic implementation)
+        function toggleMobileMenu() {
+            // This is a placeholder - implement actual mobile menu if needed
+            alert('Mobile menu would open here');
+        }
+
+        // Prevent form resubmission on page refresh
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PROACTIVA Research Hub - Pioneering research on healthcare's digital transformation and the technologies reshaping patient care delivery">
+    <meta name="robots" content="index, follow">
+    <title>PROACTIVA Research Hub - VA's Digital Healthcare Transformation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: #1a1a1a;
+            line-height: 1.6;
+            background: #ffffff;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Prevent text selection on UI elements */
+        button, .cta-button, .nav-link, .login-btn {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        /* Header */
+        .header {
+            background: #fff;
+            border-bottom: 1px solid #e5e5e5;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            text-decoration: none;
+            letter-spacing: -0.5px;
+            cursor: pointer;
+        }
+
+        .logo .pro {
+            color: #0066cc;
+        }
+
+        .logo .acti {
+            color: #0066cc;
+        }
+
+        .logo .va {
+            color: #e74c3c;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: #666;
+            text-decoration: none;
+            font-size: 15px;
+            transition: color 0.2s;
+            cursor: pointer;
+        }
+
+        .nav-link:hover {
+            color: #e74c3c;
+        }
+
+        .login-btn {
+            background: #e74c3c;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 15px;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+        }
+
+        .login-btn:hover {
+            background: #c0392b;
+            transform: translateY(-1px);
+        }
+
+        /* Mobile Navigation */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .mobile-menu-btn span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: #666;
+            margin: 5px 0;
+            transition: all 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 70px;
+            padding: 60px 20px 40px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            color: #666;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Featured Article */
+        .featured-article {
+            padding: 60px 20px;
+            background: white;
+        }
+
+        .article-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .article-label {
+            color: #e74c3c;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+
+        .article-title {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #1a1a1a;
+            line-height: 1.2;
+        }
+
+        .article-meta {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .article-content {
+            font-size: 17px;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .article-content h2 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+
+        .article-content h3 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-top: 32px;
+            margin-bottom: 16px;
+            color: #1a1a1a;
+        }
+
+        .article-content p {
+            margin-bottom: 20px;
+        }
+
+        .article-content ul {
+            margin-bottom: 20px;
+            margin-left: 20px;
+        }
+
+        .article-content li {
+            margin-bottom: 12px;
+            line-height: 1.8;
+        }
+
+        .key-stat {
+            background: #f8f9fa;
+            border-left: 4px solid #e74c3c;
+            padding: 20px;
+            margin: 30px 0;
+            font-size: 18px;
+            color: #1a1a1a;
+        }
+
+        .key-stat strong {
+            color: #e74c3c;
+            font-size: 24px;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin: 30px 0;
+        }
+
+        .tech-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 24px;
+            border: 1px solid #e5e5e5;
+        }
+
+        .tech-card h4 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #1a1a1a;
+        }
+
+        .tech-card p {
+            font-size: 15px;
+            color: #666;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .article-cta {
+            background: #fef5f5;
+            border-radius: 12px;
+            padding: 32px;
+            margin-top: 48px;
+            text-align: center;
+        }
+
+        .article-cta h3 {
+            font-size: 24px;
+            margin-bottom: 12px;
+            color: #1a1a1a;
+        }
+
+        .article-cta p {
+            color: #666;
+            margin-bottom: 24px;
+        }
+
+        .cta-button {
+            background: #e74c3c;
+            color: white;
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            display: inline-block;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+        }
+
+        .cta-button:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+        }
+
+        /* Research Areas */
+        .research-areas {
+            padding: 80px 20px;
+            background: #f8f9fa;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .research-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .research-card {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .research-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        .research-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #fee, #fcc);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        .research-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #1a1a1a;
+        }
+
+        .research-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 60px 20px 40px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+
+        .footer-logo .pro, .footer-logo .acti {
+            color: #0066cc;
+        }
+
+        .footer-logo .va {
+            color: #e74c3c;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: #999;
+            text-decoration: none;
+            transition: color 0.2s;
+            cursor: pointer;
+        }
+
+        .footer-link:hover {
+            color: white;
+        }
+
+        .footer-divider {
+            height: 1px;
+            background: #333;
+            margin: 40px 0;
+        }
+
+        .footer-bottom {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Modal Close Button */
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 32px;
+            height: 32px;
+            background: #f8f9fa;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: #666;
+            transition: all 0.2s;
+        }
+
+        .modal-close:hover {
+            background: #e9ecef;
+            color: #333;
+        }
+
+        /* Access Modal */
+        .access-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            backdrop-filter: blur(5px);
+            padding: 20px;
+        }
+
+        .access-modal {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .access-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .access-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .access-text {
+            color: #666;
+            margin-bottom: 24px;
+        }
+
+        /* Email Signup Form */
+        .signup-form {
+            display: none;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #e74c3c;
+        }
+
+        .form-submit {
+            background: #e74c3c;
+            color: white;
+            padding: 12px 32px;
+            border-radius: 8px;
+            border: none;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.2s;
+        }
+
+        .form-submit:hover {
+            background: #c0392b;
+            transform: translateY(-1px);
+        }
+
+        .form-submit:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .form-note {
+            font-size: 13px;
+            color: #666;
+            margin-top: 16px;
+        }
+
+        .success-message {
+            display: none;
+            color: #27ae60;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .error-message {
+            display: none;
+            color: #e74c3c;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            color: #0066cc;
+            text-decoration: none;
+            font-size: 14px;
+            cursor: pointer;
+            display: inline-block;
+            margin-top: 16px;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Admin Dashboard */
+        .admin-dashboard {
+            display: none;
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .dashboard-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .logout-btn {
+            background: #666;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 6px;
+            border: none;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .logout-btn:hover {
+            background: #555;
+        }
+
+        .submissions-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .submissions-table th {
+            background: #f8f9fa;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid #dee2e6;
+        }
+
+        .submissions-table td {
+            padding: 12px;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .submissions-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .no-submissions {
+            text-align: center;
+            color: #666;
+            padding: 40px;
+            font-size: 16px;
+        }
+
+        .dashboard-actions {
+            display: flex;
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .dashboard-btn {
+            padding: 10px 20px;
+            border-radius: 6px;
+            border: none;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .download-btn {
+            background: #28a745;
+            color: white;
+        }
+
+        .download-btn:hover {
+            background: #218838;
+        }
+
+        .clear-btn {
+            background: #dc3545;
+            color: white;
+        }
+
+        .clear-btn:hover {
+            background: #c82333;
+        }
+
+        .submission-count {
+            background: #e3f2fd;
+            color: #0066cc;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* Login Form */
+        .login-form {
+            display: none;
+        }
+
+        .login-error {
+            display: none;
+            color: #e74c3c;
+            font-size: 14px;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero {
+                padding: 40px 20px 30px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .article-title {
+                font-size: 28px;
+            }
+
+            .hero-subtitle {
+                font-size: 18px;
+            }
+
+            .featured-article {
+                padding: 40px 20px;
+            }
+
+            .article-content {
+                font-size: 16px;
+            }
+
+            .article-content h2 {
+                font-size: 24px;
+            }
+
+            .article-content h3 {
+                font-size: 20px;
+            }
+
+            .tech-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .research-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .research-areas {
+                padding: 60px 20px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .footer {
+                padding: 40px 20px;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .article-title {
+                font-size: 24px;
+            }
+
+            .research-card {
+                padding: 30px;
+            }
+
+            .access-modal {
+                padding: 30px 20px;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            .header, .footer, .cta-button, .research-areas {
+                display: none;
+            }
+
+            .article-content {
+                color: #000;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo" onclick="scrollToTop()">
+                <span class="pro">PRO</span><span class="acti">ACTI</span><span class="va">VA</span>
+            </div>
+            <nav class="nav-links">
+                <span class="nav-link" onclick="scrollToSection('research')">Research Areas</span>
+                <span class="nav-link" onclick="showAccessModal()">Publications</span>
+                <span class="nav-link" onclick="showAccessModal()">Data & Insights</span>
+                <span class="nav-link" onclick="showAccessModal()">About</span>
+                <button class="login-btn" onclick="showLoginModal()">Member Login</button>
+            </nav>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>PROACTIVA Research Hub</h1>
+            <p class="hero-subtitle">
+                Pioneering research on healthcare's digital transformation and the technologies reshaping patient care delivery
+            </p>
+        </div>
+    </section>
+
+    <!-- Featured Article -->
+    <section class="featured-article" id="article">
+        <div class="article-container">
+            <div class="article-label">Featured Research</div>
+            <h1 class="article-title">The VA's Digital Transformation: A $369 Billion Investment in Veterans' Healthcare Future</h1>
+            <div class="article-meta">Executive Briefing • July 2025 • 10 min read</div>
+            
+            <div class="article-content">
+                <p><strong>The Department of Veterans Affairs is undergoing the most significant technological transformation in its history.</strong> With a total FY2025 budget of $369.3 billion—a 9.8% increase over 2024—the VA is positioning itself at the forefront of healthcare innovation. This unprecedented investment includes $7.6 billion specifically allocated for information technology, with targeted funding for artificial intelligence, telehealth expansion, and cutting-edge treatment modalities.</p>
+
+                <div class="key-stat">
+                    <strong>7.3 million</strong> unique patients served with <strong>142.6 million</strong> outpatient visits projected for 2025
+                </div>
+
+                <h2>Legislative Catalysts Driving Transformation</h2>
+
+                <p>Two landmark acts have fundamentally reshaped the VA healthcare landscape, creating both opportunities and imperatives for technological advancement:</p>
+
+                <h3>The PACT Act: Expanding Care for Toxic Exposure</h3>
+                
+                <p>The Sergeant First Class Heath Robinson Honoring our Promise to Address Comprehensive Toxics (PACT) Act represents the largest expansion of VA healthcare eligibility in decades. With $24.5 billion allocated through the Toxic Exposures Fund (TEF) for 2025, the Act has:</p>
+
+                <ul>
+                    <li>Enabled earlier healthcare eligibility for millions of Veterans exposed to toxic substances</li>
+                    <li>Screened 4.6 million Veterans for toxic exposure to date</li>
+                    <li>Created urgent demand for scalable, technology-enabled care delivery models</li>
+                </ul>
+
+                <h3>The MISSION Act: Integrating External Networks</h3>
+
+                <p>The MISSION Act's Veterans Community Care Program has transformed how Veterans access care, particularly in rural areas. This integration of external healthcare networks requires sophisticated interoperability solutions—a key driver of the VA's digital transformation initiatives.</p>
+
+                <div class="key-stat">
+                    <strong>32.5 million</strong> telehealth appointments completed in FY2024, with plans to eliminate all telehealth copayments
+                </div>
+
+                <h2>Strategic Technology Investments</h2>
+
+                <h3>Artificial Intelligence: From Claims to Clinical Care</h3>
+                
+                <p>The VA's AI investments span the entire healthcare continuum:</p>
+
+                <div class="tech-grid">
+                    <div class="tech-card">
+                        <h4>Benefits Processing</h4>
+                        <p>$2 million allocated for AI in Veterans Benefits Administration to streamline claims processing and improve accuracy</p>
+                    </div>
+                    <div class="tech-card">
+                        <h4>Clinical Research</h4>
+                        <p>$10 million dedicated to AI research for translating evidence into practice and piloting novel diagnostic tools</p>
+                    </div>
+                    <div class="tech-card">
+                        <h4>Ambient Documentation</h4>
+                        <p>AI-powered scribe technology pilots aim to reduce provider burnout and improve patient interaction quality</p>
+                    </div>
+                </div>
+
+                <p>Particularly innovative is the VA's use of predictive analytics for patient risk stratification, including tools like SAFE-Watch that proactively identify Veterans at risk of suicide—supporting the VA's top clinical priority.</p>
+
+                <h3>Telehealth and Remote Care Evolution</h3>
+
+                <p>The VA's telehealth expansion represents a fundamental shift in care delivery:</p>
+
+                <ul>
+                    <li><strong>ATLAS Sites:</strong> Grant program funding for Accessing Telehealth through Local Area Stations in non-VA facilities</li>
+                    <li><strong>Tele-Emergency Care:</strong> Direct connection with VA emergency providers for remote evaluation</li>
+                    <li><strong>TeleOncology:</strong> Connecting Veterans with cancer specialists regardless of geographic location</li>
+                    <li><strong>Wearable Integration:</strong> Testing synchronization of health tracking devices with the "Share My Health Data App"</li>
+                </ul>
+
+                <h3>Electronic Health Record Modernization</h3>
+
+                <p>While the EHRM budget has been strategically reduced to $894 million (52% decrease), this "Reset" focuses on optimization rather than expansion—addressing clinician concerns and strengthening system foundations at six Federal EHR sites. The Veteran Interoperability Pledge (VIP), launched in October 2023, promises seamless data sharing between VA and non-VA health systems.</p>
+
+                <h2>Emerging Technologies and Future Innovations</h2>
+
+                <h3>Virtual Reality and Simulation</h3>
+                <p>The VA SimLEARN program leverages VR for provider training, including "The Dementia Experience" to enhance empathy and understanding. VR applications extend to PTSD treatment, physical therapy enhancement, and chronic pain management.</p>
+
+                <h3>Robotics and Automation</h3>
+                <p>Service Assisted Robots (SARs) are currently operational at 65 VA facilities, handling routine tasks to free healthcare professionals for direct patient care. Future applications include surgical assistance and pharmaceutical delivery systems.</p>
+
+                <h3>Groundbreaking Research Initiatives</h3>
+                <p>The VA is pioneering innovative treatments, including the first VA-funded study on MDMA-assisted therapy for PTSD and alcohol use disorder in decades—signaling openness to cutting-edge therapeutic approaches.</p>
+
+                <div class="key-stat">
+                    <strong>$17.1 billion</strong> invested in mental health care with an additional <strong>$583 million</strong> for suicide prevention outreach
+                </div>
+
+                <h2>Critical Implementation Challenges</h2>
+
+                <p>Despite substantial investments, the VA faces significant hurdles:</p>
+
+                <h3>Workforce Transformation</h3>
+                <p>A significant portion of the VA's IT workforce is nearing retirement eligibility, creating urgency around knowledge transfer and talent acquisition. The "Hire Faster and More Competitively" initiative aims to streamline recruitment processes.</p>
+
+                <h3>Data Integration and Interoperability</h3>
+                <p>Integrating new technologies with existing systems remains complex due to data silos and non-standardized formats. The VIP initiative represents a critical step toward solving these challenges.</p>
+
+                <h3>Equity and Access</h3>
+                <p>Ensuring equitable access to digital health solutions across diverse Veteran populations, particularly in rural areas, requires continued investment in infrastructure and user-centered design.</p>
+
+                <h2>Strategic Implications for Healthcare Innovation</h2>
+
+                <p>The VA's transformation offers crucial insights for the broader healthcare ecosystem:</p>
+
+                <ul>
+                    <li><strong>Scale Advantage:</strong> With 7.3 million patients, the VA serves as a massive proving ground for healthcare technologies</li>
+                    <li><strong>Integration Model:</strong> The MISSION Act's hybrid approach demonstrates viable public-private healthcare integration</li>
+                    <li><strong>Innovation Adoption:</strong> From AI to MDMA therapy, the VA shows surprising agility in embracing emerging treatments</li>
+                    <li><strong>Outcome Focus:</strong> Emphasis on measurable improvements (48,000 homeless Veterans housed, exceeding goals) provides clear ROI metrics</li>
+                </ul>
+
+                <p>As the VA continues its journey toward becoming a High Reliability Organization (HRO), its investments in technology and innovation serve as a blueprint for healthcare transformation at scale. The convergence of legislative mandates, demographic pressures, and technological capabilities creates a unique moment for reimagining Veterans' healthcare—with implications extending far beyond the VA system.</p>
+
+                <div class="article-cta">
+                    <h3>Access Complete VA Technology Analysis</h3>
+                    <p>Explore detailed breakdowns of VA technology initiatives, vendor opportunities, and strategic recommendations for healthcare innovators</p>
+                    <button class="cta-button" onclick="showAccessModal()">Request Full Report</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Areas -->
+    <section class="research-areas" id="research">
+        <div class="section-header">
+            <h2 class="section-title">Research Focus Areas</h2>
+            <p class="section-subtitle">
+                Comprehensive analysis across key healthcare transformation domains
+            </p>
+        </div>
+        <div class="research-grid">
+            <div class="research-card" onclick="showAccessModal()">
+                <div class="research-icon">🤖</div>
+                <h3 class="research-title">AI & Machine Learning</h3>
+                <p class="research-description">
+                    Deep analysis of AI applications in diagnostics, treatment planning, and operational efficiency
+                </p>
+            </div>
+            <div class="research-card" onclick="showAccessModal()">
+                <div class="research-icon">⌚</div>
+                <h3 class="research-title">Wearables & IoMT</h3>
+                <p class="research-description">
+                    Evaluating the Internet of Medical Things and its impact on continuous patient monitoring
+                </p>
+            </div>
+            <div class="research-card" onclick="showAccessModal()">
+                <div class="research-icon">🏥</div>
+                <h3 class="research-title">Hospital Disruption Models</h3>
+                <p class="research-description">
+                    Tracking how startups and new care models are displacing traditional hospital systems
+                </p>
+            </div>
+            <div class="research-card" onclick="showAccessModal()">
+                <div class="research-icon">📱</div>
+                <h3 class="research-title">Digital Therapeutics</h3>
+                <p class="research-description">
+                    Evidence-based analysis of software-driven interventions and their clinical outcomes
+                </p>
+            </div>
+            <div class="research-card" onclick="showAccessModal()">
+                <div class="research-icon">☁️</div>
+                <h3 class="research-title">Cloud & Infrastructure</h3>
+                <p class="research-description">
+                    Examining scalable healthcare IT architectures and their ROI implications
+                </p>
+            </div>
+            <div class="research-card" onclick="showAccessModal()">
+                <div class="research-icon">🔬</div>
+                <h3 class="research-title">Emerging Technologies</h3>
+                <p class="research-description">
+                    Forward-looking research on 3D bioprinting, robotics, and edge computing in healthcare
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <span class="pro">PRO</span><span class="acti">ACTI</span><span class="va">VA</span>
+            </div>
+            <div class="footer-links">
+                <span class="footer-link" onclick="showAccessModal()">About Proactiva</span>
+                <span class="footer-link" onclick="showAccessModal()">Methodology</span>
+                <span class="footer-link" onclick="showAccessModal()">Contact</span>
+                <span class="footer-link" onclick="showAccessModal()">Privacy</span>
+            </div>
+            <div class="footer-divider"></div>
+            <div class="footer-bottom">
+                © 2025 Proactiva Research. All research and data are proprietary.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Access Required Modal -->
+    <div class="access-overlay" id="accessModal">
+        <div class="access-modal">
+            <div id="modalContent">
+                <div class="access-icon">🔒</div>
+                <h3 class="access-title">Access Required</h3>
+                <p class="access-text">
+                    Full research reports, data sets, and strategic insights are available exclusively to Proactiva members and partners.
+                </p>
+                <button class="cta-button" onclick="showSignupForm()">Request Access</button>
+            </div>
+            
+            <div class="signup-form" id="signupForm">
+                <h3 class="access-title">Request Research Access</h3>
+                <p class="success-message" id="successMessage">Thank you! We'll review your request and contact you within 24 hours.</p>
+                <p class="error-message" id="errorMessage">Please fill in all required fields.</p>
+                
+                <form id="accessForm" onsubmit="handleFormSubmit(event)">
+                    <div class="form-group">
+                        <label class="form-label" for="name">Full Name *</label>
+                        <input type="text" id="name" name="name" class="form-input" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" class="form-input" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="organization">Organization</label>
+                        <input type="text" id="organization" name="organization" class="form-input">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="role">Role/Title</label>
+                        <input type="text" id="role" name="role" class="form-input">
+                    </div>
+                    
+                    <button type="submit" class="form-submit" id="submitBtn">Submit Request</button>
+                    
+                    <p class="form-note">
+                        We respect your privacy. Your information will only be used to evaluate your access request.
+                    </p>
+                </form>
+                
+                <span class="back-link" onclick="hideSignupForm()">← Back</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="access-overlay" id="loginModal">
+        <div class="access-modal">
+            <div class="login-form" id="loginForm" style="display: block;">
+                <h3 class="access-title">Member Login</h3>
+                <p class="login-error" id="loginError">Invalid credentials. Please try again.</p>
+                
+                <form onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label class="form-label" for="loginUsername">Username</label>
+                        <input type="text" id="loginUsername" name="loginUsername" class="form-input" required autocomplete="username">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" name="loginPassword" class="form-input" required autocomplete="current-password">
+                    </div>
+                    
+                    <button type="submit" class="form-submit">Login</button>
+                    
+                    <p class="form-note" style="margin-top: 20px;">
+                        Not a member? <a href="#" onclick="switchToAccessRequest(); return false;" style="color: #e74c3c;">Request access</a>
+                    </p>
+                </form>
+                
+                <span class="back-link" onclick="hideLoginModal()">← Back</span>
+            </div>
+            
+            <div class="admin-dashboard" id="adminDashboard">
+                <div class="dashboard-header">
+                    <h2 class="dashboard-title">Access Requests Dashboard</h2>
+                    <button class="logout-btn" onclick="logout()">Logout</button>
+                </div>
+                
+                <div id="submissionsContent">
+                    <!-- Content will be populated by JavaScript -->
+                </div>
+                
+                <div class="dashboard-actions">
+                    <button class="dashboard-btn download-btn" onclick="downloadSubmissionsCSV()">
+                        Download CSV
+                    </button>
+                    <button class="dashboard-btn clear-btn" onclick="clearAllSubmissions()">
+                        Clear All Data
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scrolling
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Modal functionality
+        function showAccessModal() {
+            document.getElementById('accessModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            hideSignupForm();
+        }
+
+        function hideAccessModal() {
+            document.getElementById('accessModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            hideSignupForm();
+            resetForm();
+        }
+
+        function showSignupForm() {
+            document.getElementById('modalContent').style.display = 'none';
+            document.getElementById('signupForm').style.display = 'block';
+            document.getElementById('successMessage').style.display = 'none';
+            document.getElementById('errorMessage').style.display = 'none';
+        }
+
+        function hideSignupForm() {
+            document.getElementById('modalContent').style.display = 'block';
+            document.getElementById('signupForm').style.display = 'none';
+        }
+
+        function resetForm() {
+            document.getElementById('accessForm').reset();
+            document.getElementById('successMessage').style.display = 'none';
+            document.getElementById('errorMessage').style.display = 'none';
+            document.getElementById('submitBtn').disabled = false;
+            document.getElementById('submitBtn').textContent = 'Submit Request';
+        }
+
+        // Form submission
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            
+            const form = event.target;
+            const submitBtn = document.getElementById('submitBtn');
+            const successMsg = document.getElementById('successMessage');
+            const errorMsg = document.getElementById('errorMessage');
+            
+            // Hide messages
+            successMsg.style.display = 'none';
+            errorMsg.style.display = 'none';
+            
+            // Get form data
+            const formData = new FormData(form);
+            const data = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                organization: formData.get('organization'),
+                role: formData.get('role'),
+                timestamp: new Date().toISOString()
+            };
+            
+            // Validate
+            if (!data.name || !data.email) {
+                errorMsg.style.display = 'block';
+                return;
+            }
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+            
+            // Option 1: Send to email using mailto (opens email client)
+            // This creates a pre-filled email with the form data
+            const emailBody = `New Access Request from PROACTIVA Research Hub%0D%0A%0D%0A` +
+                `Name: ${data.name}%0D%0A` +
+                `Email: ${data.email}%0D%0A` +
+                `Organization: ${data.organization || 'Not provided'}%0D%0A` +
+                `Role: ${data.role || 'Not provided'}%0D%0A` +
+                `Submitted: ${data.timestamp}`;
+            
+            const mailtoLink = `mailto:research@proactiva.com?subject=Research Access Request&body=${emailBody}`;
+            
+            // Option 2: Store in localStorage for later retrieval
+            // Get existing submissions or create new array
+            let submissions = JSON.parse(localStorage.getItem('proactivaSubmissions') || '[]');
+            submissions.push(data);
+            localStorage.setItem('proactivaSubmissions', JSON.stringify(submissions));
+            
+            // Option 3: Create downloadable CSV file with all submissions
+            // This function is defined below
+            
+            setTimeout(() => {
+                // Success
+                successMsg.style.display = 'block';
+                form.style.display = 'none';
+                
+                // Uncomment the next line to automatically open email client
+                // window.location.href = mailtoLink;
+                
+                // Log submission (you can view these in browser console)
+                console.log('Access request submitted:', data);
+                console.log('All submissions:', submissions);
+                console.log('To download all submissions as CSV, run: downloadSubmissionsCSV()');
+                
+                // Reset after delay
+                setTimeout(() => {
+                    hideAccessModal();
+                }, 3000);
+            }, 1000);
+        }
+        
+        // Function to download all submissions as CSV
+        function downloadSubmissionsCSV() {
+            const submissions = JSON.parse(localStorage.getItem('proactivaSubmissions') || '[]');
+            
+            if (submissions.length === 0) {
+                alert('No submissions to download');
+                return;
+            }
+            
+            // Create CSV content
+            const headers = ['Name', 'Email', 'Organization', 'Role', 'Timestamp'];
+            const csvContent = [
+                headers.join(','),
+                ...submissions.map(sub => [
+                    `"${sub.name}"`,
+                    `"${sub.email}"`,
+                    `"${sub.organization || ''}"`,
+                    `"${sub.role || ''}"`,
+                    `"${sub.timestamp}"`
+                ].join(','))
+            ].join('\n');
+            
+            // Create and download file
+            const blob = new Blob([csvContent], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `proactiva-submissions-${new Date().toISOString().split('T')[0]}.csv`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }
+        
+        // Function to view all submissions (for admin use)
+        function viewSubmissions() {
+            const submissions = JSON.parse(localStorage.getItem('proactivaSubmissions') || '[]');
+            console.table(submissions);
+            return submissions;
+        }
+        
+        // Function to clear all submissions (for admin use)
+        function clearSubmissions() {
+            if (confirm('Are you sure you want to clear all submissions?')) {
+                localStorage.removeItem('proactivaSubmissions');
+                console.log('All submissions cleared');
+            }
+        }
+
+        // Login functionality
+        function showLoginModal() {
+            document.getElementById('loginModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            document.getElementById('loginForm').style.display = 'block';
+            document.getElementById('adminDashboard').style.display = 'none';
+            document.getElementById('loginError').style.display = 'none';
+            // Clear form
+            document.getElementById('loginUsername').value = '';
+            document.getElementById('loginPassword').value = '';
+        }
+
+        function hideLoginModal() {
+            document.getElementById('loginModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            document.getElementById('loginUsername').value = '';
+            document.getElementById('loginPassword').value = '';
+            document.getElementById('loginError').style.display = 'none';
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            // Simple hardcoded credentials (change these!)
+            if (username === 'admin' && password === 'proactiva2025') {
+                // Show dashboard
+                document.getElementById('loginForm').style.display = 'none';
+                document.getElementById('adminDashboard').style.display = 'block';
+                document.getElementById('loginError').style.display = 'none';
+                loadSubmissions();
+            } else {
+                // Show error
+                document.getElementById('loginError').style.display = 'block';
+                // Clear password field for retry
+                document.getElementById('loginPassword').value = '';
+                document.getElementById('loginPassword').focus();
+            }
+        }
+
+        function switchToAccessRequest() {
+            hideLoginModal();
+            setTimeout(() => {
+                showAccessModal();
+            }, 300);
+        }
+
+        function logout() {
+            document.getElementById('adminDashboard').style.display = 'none';
+            document.getElementById('loginForm').style.display = 'block';
+            hideLoginModal();
+        }
+
+        function loadSubmissions() {
+            const submissions = JSON.parse(localStorage.getItem('proactivaSubmissions') || '[]');
+            const content = document.getElementById('submissionsContent');
+            
+            if (submissions.length === 0) {
+                content.innerHTML = '<div class="no-submissions">No access requests yet.</div>';
+                return;
+            }
+            
+            // Create table
+            let html = `
+                <div style="margin-bottom: 16px;">
+                    <span class="submission-count">${submissions.length} Total Requests</span>
+                </div>
+                <table class="submissions-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Organization</th>
+                            <th>Role</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            
+            // Add rows (newest first)
+            submissions.reverse().forEach(sub => {
+                const date = new Date(sub.timestamp).toLocaleDateString();
+                html += `
+                    <tr>
+                        <td>${date}</td>
+                        <td>${sub.name}</td>
+                        <td>${sub.email}</td>
+                        <td>${sub.organization || '-'}</td>
+                        <td>${sub.role || '-'}</td>
+                    </tr>
+                `;
+            });
+            
+            html += '</tbody></table>';
+            content.innerHTML = html;
+        }
+
+        function clearAllSubmissions() {
+            if (confirm('Are you sure you want to clear all submissions? This cannot be undone.')) {
+                localStorage.removeItem('proactivaSubmissions');
+                loadSubmissions();
+                alert('All submissions have been cleared.');
+            }
+        }
+
+        // Close login modal when clicking outside
+        document.getElementById('loginModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                hideLoginModal();
+            }
+        });
+
+        // Close modals on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                hideAccessModal();
+                hideLoginModal();
+            }
+        });
+    </script>
+</body>
+</html>
