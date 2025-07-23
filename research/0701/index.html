@@ -13,6 +13,10 @@
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏥</text></svg>">
     <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏥</text></svg>">
+    
+    <!-- Shared Styles -->
+    <link rel="stylesheet" href="/shared-styles.css">
+    
     <style>
         * {
             margin: 0;
@@ -600,6 +604,7 @@
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             position: relative;
         }
+        
 
         .access-icon {
             font-size: 48px;
@@ -701,122 +706,16 @@
             cursor: pointer;
             display: inline-block;
             margin-top: 16px;
+            background: none;
+            border: none;
+            padding: 0;
+            font-family: inherit;
         }
 
         .back-link:hover {
             text-decoration: underline;
         }
 
-        /* Admin Dashboard */
-        .admin-dashboard {
-            display: none;
-            padding: 40px;
-            max-width: 800px;
-            width: 100%;
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-
-        .dashboard-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-
-        .dashboard-title {
-            font-size: 28px;
-            font-weight: 600;
-            color: #1a1a1a;
-        }
-
-        .logout-btn {
-            background: #666;
-            color: white;
-            padding: 8px 20px;
-            border-radius: 6px;
-            border: none;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .logout-btn:hover {
-            background: #555;
-        }
-
-        .submissions-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-
-        .submissions-table th {
-            background: #f8f9fa;
-            padding: 12px;
-            text-align: left;
-            font-weight: 600;
-            border-bottom: 2px solid #dee2e6;
-        }
-
-        .submissions-table td {
-            padding: 12px;
-            border-bottom: 1px solid #dee2e6;
-        }
-
-        .submissions-table tr:hover {
-            background: #f8f9fa;
-        }
-
-        .no-submissions {
-            text-align: center;
-            color: #666;
-            padding: 40px;
-            font-size: 16px;
-        }
-
-        .dashboard-actions {
-            display: flex;
-            gap: 16px;
-            margin-top: 20px;
-        }
-
-        .dashboard-btn {
-            padding: 10px 20px;
-            border-radius: 6px;
-            border: none;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-family: inherit;
-        }
-
-        .download-btn {
-            background: #28a745;
-            color: white;
-        }
-
-        .download-btn:hover {
-            background: #218838;
-        }
-
-        .clear-btn {
-            background: #dc3545;
-            color: white;
-        }
-
-        .clear-btn:hover {
-            background: #c82333;
-        }
-
-        .submission-count {
-            background: #e3f2fd;
-            color: #0066cc;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 500;
-        }
 
         /* Login Form */
         .login-form {
@@ -975,9 +874,12 @@
         <div class="article-container">
             <div class="article-label">Featured Brief</div>
             <h1 class="article-title">The VA's Digital Transformation: A $369 Billion Investment in Veterans' Healthcare Future</h1>
-            <div class="article-meta">
-                <time datetime="2025-07">Executive Briefing • July 2025</time> • 
-                <span aria-label="Estimated reading time">10 min read</span>
+            <div class="article-meta" style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <time datetime="2025-07">Executive Briefing • July 2025</time> • 
+                    <span aria-label="Estimated reading time">10 min read</span>
+                </div>
+                <div>See also >> <a href="/research/0702/" style="color: #0066cc; text-decoration: none;"><em>Healthcare's Digital Future</em></a></div>
             </div>
             
             <div class="article-content">
@@ -1184,8 +1086,8 @@
             </div>
             
             <div class="signup-form" id="signupForm">
-                <h3 class="access-title">Request Research Access</h3>
-                <div class="success-message" id="successMessage" role="status" aria-live="polite">Thank you! We'll review your request and contact you within 24 hours.</div>
+                <h3 class="access-title">Request Access</h3>
+                <div class="success-message" id="successMessage" role="status" aria-live="polite" style="color: #0066cc;">We'll review and contact you soon!</div>
                 <div class="error-message" id="errorMessage" role="alert" aria-live="assertive">Please fill in all required fields.</div>
                 
                 <form id="accessForm" onsubmit="handleFormSubmit(event)" novalidate>
@@ -1218,7 +1120,7 @@
                     </p>
                 </form>
                 
-                <button class="back-link" onclick="hideSignupForm()" type="button">← Back</button>
+                <button class="back-link" id="signupBackBtn" onclick="hideSignupForm()" type="button">← Back</button>
             </div>
         </div>
     </div>
@@ -1254,8 +1156,14 @@
             
             <div class="admin-dashboard" id="adminDashboard" role="main">
                 <div class="dashboard-header">
-                    <h2 class="dashboard-title">Access Requests Dashboard</h2>
-                    <button class="logout-btn" onclick="logout()" aria-label="Logout from admin dashboard">Logout</button>
+                    <div class="dashboard-logo">
+                        <span class="pro">PRO</span><span class="acti">ACTI</span><span class="va">VA</span>
+                    </div>
+                    <h2 class="dashboard-title">Communications Dashboard</h2>
+                </div>
+                
+                <div class="dashboard-stats" id="dashboardStats">
+                    <!-- Stats will be populated by JavaScript -->
                 </div>
                 
                 <div id="submissionsContent" role="region" aria-label="Submissions data">
@@ -1264,9 +1172,18 @@
                 
                 <div class="dashboard-actions">
                     <button class="dashboard-btn download-btn" onclick="downloadSubmissionsCSV()" aria-label="Download submissions as CSV file">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 8px;">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
                         Download CSV
                     </button>
                     <button class="dashboard-btn clear-btn" onclick="clearAllSubmissions()" aria-label="Clear all submission data">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 8px;">
+                            <polyline points="3 6 5 6 21 6"></polyline>
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                        </svg>
                         Clear All Data
                     </button>
                 </div>
@@ -1274,6 +1191,11 @@
         </div>
     </div>
 
+    <!-- Shared Components -->
+    <link rel="stylesheet" href="/dashboard.css">
+    <script src="/shared-scripts.js"></script>
+    <script src="/dashboard.js"></script>
+    
     <script>
         // Mobile menu toggle functionality
         function toggleMobileMenu() {
@@ -1351,44 +1273,20 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Modal system - robust and reliable
+        // Enhanced Modal system with unified management
         const Modal = {
-            // Track open modals
             openModals: new Set(),
             
-            // Initialize modal system
             init() {
                 this.setupEventListeners();
             },
             
-            // Setup global event listeners
             setupEventListeners() {
-                // Escape key handler
                 document.addEventListener('keydown', (e) => {
                     if (e.key === 'Escape') {
                         this.closeAll();
                     }
                 });
-                
-                // Click outside handler for access modal
-                const accessModal = document.getElementById('accessModal');
-                if (accessModal) {
-                    accessModal.addEventListener('click', (e) => {
-                        if (e.target === accessModal) {
-                            this.hide('accessModal');
-                        }
-                    });
-                }
-                
-                // Click outside handler for login modal
-                const loginModal = document.getElementById('loginModal');
-                if (loginModal) {
-                    loginModal.addEventListener('click', (e) => {
-                        if (e.target === loginModal) {
-                            this.hide('loginModal');
-                        }
-                    });
-                }
             },
             
             // Show modal with proper state management
@@ -1466,15 +1364,30 @@
                 const successMsg = document.getElementById('successMessage');
                 const errorMsg = document.getElementById('errorMessage');
                 const submitBtn = document.getElementById('submitBtn');
+                const accessTitle = document.querySelector('#signupForm .access-title');
+                const backBtn = document.getElementById('signupBackBtn');
                 
                 if (modalContent) modalContent.style.display = 'block';
                 if (signupForm) signupForm.style.display = 'none';
                 if (accessForm) accessForm.reset();
-                if (successMsg) successMsg.style.display = 'none';
+                if (successMsg) {
+                    successMsg.style.display = 'none';
+                    successMsg.innerHTML = 'We\'ll review and contact you soon!';
+                    successMsg.style.color = '';
+                    successMsg.style.textAlign = '';
+                }
                 if (errorMsg) errorMsg.style.display = 'none';
                 if (submitBtn) {
                     submitBtn.disabled = false;
                     submitBtn.textContent = 'Submit Request';
+                }
+                if (accessTitle) {
+                    accessTitle.textContent = 'Request Access';
+                    accessTitle.style.display = 'block';
+                    accessTitle.style.textAlign = '';
+                }
+                if (backBtn) {
+                    backBtn.onclick = function() { hideSignupForm(); };
                 }
             },
             
@@ -1491,6 +1404,9 @@
                 if (loginError) loginError.style.display = 'none';
                 if (loginUsername) loginUsername.value = '';
                 if (loginPassword) loginPassword.value = '';
+                
+                // Remove dashboard mode class
+                document.getElementById('loginModal').classList.remove('dashboard-mode');
             },
             
             // Show access modal signup form
@@ -1524,7 +1440,11 @@
         
         // Legacy function wrappers for backward compatibility
         function showAccessModal() {
+            // Reset the access modal to clean state first
+            Modal.resetAccessModal();
+            // Show the modal and go directly to signup form
             Modal.show('accessModal');
+            Modal.showSignupForm();
         }
         
         function hideAccessModal() {
@@ -1532,6 +1452,8 @@
         }
         
         function showSignupForm() {
+            // Skip the intermediate modal and go directly to signup form
+            Modal.show('accessModal');
             Modal.showSignupForm();
         }
         
@@ -1607,7 +1529,8 @@
                     );
                     
                     if (isDuplicate) {
-                        throw new Error('You have already submitted a request recently. Please wait before submitting again.');
+                        // Show success message even for duplicates
+                        return true;
                     }
                     
                     submissions.push(data);
@@ -1673,12 +1596,28 @@
                         `Role: ${data.role || 'Not provided'}\n` +
                         `Submitted: ${data.timestamp}`;
                     
-                    // Show success message
+                    // Show success message with checkmark
                     if (successMsg) {
                         successMsg.style.display = 'block';
-                        successMsg.textContent = 'Thank you! Your request has been submitted successfully. We\'ll review it and contact you within 24 hours.';
+                        successMsg.innerHTML = '<div style="font-size: 48px; color: #27ae60; margin-bottom: 20px; text-align: center;">✓</div>We\'ll review and contact you soon!';
+                        successMsg.style.color = '#0066cc'; // Change to blue
+                        successMsg.style.textAlign = 'center';
                     }
                     if (form) form.style.display = 'none';
+                    
+                    // Change the "Request Access" title to "Success!"
+                    const accessTitle = document.querySelector('#signupForm .access-title');
+                    if (accessTitle) {
+                        accessTitle.textContent = 'Success!';
+                        accessTitle.style.display = 'block';
+                        accessTitle.style.textAlign = 'center';
+                    }
+                    
+                    // Change back button to close entire modal after success
+                    const backBtn = document.getElementById('signupBackBtn');
+                    if (backBtn) {
+                        backBtn.onclick = function() { hideAccessModal(); };
+                    }
                     
                     // Log for debugging
                     console.log('Access request submitted successfully:', data);
@@ -1705,54 +1644,14 @@
             FormHandler.handleSubmit(event);
         }
         
-        // Function to download all submissions as CSV
-        function downloadSubmissionsCSV() {
-            const submissions = JSON.parse(localStorage.getItem('proactivaSubmissions') || '[]');
-            
-            if (submissions.length === 0) {
-                alert('No submissions to download');
-                return;
-            }
-            
-            // Create CSV content
-            const headers = ['Name', 'Email', 'Organization', 'Role', 'Timestamp'];
-            const csvContent = [
-                headers.join(','),
-                ...submissions.map(sub => [
-                    `"${sub.name}"`,
-                    `"${sub.email}"`,
-                    `"${sub.organization || ''}"`,
-                    `"${sub.role || ''}"`,
-                    `"${sub.timestamp}"`
-                ].join(','))
-            ].join('\n');
-            
-            // Create and download file
-            const blob = new Blob([csvContent], { type: 'text/csv' });
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `proactiva-submissions-${new Date().toISOString().split('T')[0]}.csv`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            window.URL.revokeObjectURL(url);
-        }
-        
-        // Function to view all submissions (for admin use)
+        // Legacy admin functions - kept for console access
         function viewSubmissions() {
             const submissions = JSON.parse(localStorage.getItem('proactivaSubmissions') || '[]');
             console.table(submissions);
             return submissions;
         }
         
-        // Function to clear all submissions (for admin use)
-        function clearSubmissions() {
-            if (confirm('Are you sure you want to clear all submissions?')) {
-                localStorage.removeItem('proactivaSubmissions');
-                console.log('All submissions cleared');
-            }
-        }
+
 
         // Login functionality
         function showLoginModal() {
@@ -1760,7 +1659,13 @@
         }
         
         function hideLoginModal() {
-            Modal.hide('loginModal');
+            // Check if we're in dashboard mode - if so, logout instead of just hiding
+            const loginModal = document.getElementById('loginModal');
+            if (loginModal && loginModal.classList.contains('dashboard-mode')) {
+                logout();
+            } else {
+                Modal.hide('loginModal');
+            }
         }
 
         // Enhanced login handling
@@ -1829,8 +1734,11 @@
                     if (adminDashboard) adminDashboard.style.display = 'block';
                     if (loginError) loginError.style.display = 'none';
                     
-                    // Load submissions
-                    AdminDashboard.loadSubmissions();
+                    // Add dashboard mode class for larger modal
+                    document.getElementById('loginModal').classList.add('dashboard-mode');
+                    
+                    // Load submissions data
+                    loadSubmissionsData();
                     
                     console.log('Admin login successful');
                 } else {
@@ -1861,137 +1769,30 @@
             Modal.hide('loginModal');
             setTimeout(() => {
                 Modal.show('accessModal');
+                Modal.showSignupForm();
             }, 300);
         }
         
         function logout() {
             // Reset login handler attempt counter
             LoginHandler.attemptCount = 0;
+            
+            // Remove dashboard mode class
+            document.getElementById('loginModal').classList.remove('dashboard-mode');
+            
+            // Reset the modal to login state (this also hides dashboard and shows login form)
+            Modal.resetLoginModal();
+            
+            // Close the modal
             Modal.hide('loginModal');
             console.log('Admin logged out');
         }
-
-        // Enhanced admin dashboard
-        const AdminDashboard = {
-            // Load and display submissions
-            loadSubmissions() {
-                try {
-                    const submissions = JSON.parse(localStorage.getItem('proactivaSubmissions') || '[]');
-                    const content = document.getElementById('submissionsContent');
-                    
-                    if (!content) {
-                        console.error('Submissions content element not found');
-                        return;
-                    }
-                    
-                    if (submissions.length === 0) {
-                        content.innerHTML = '<div class="no-submissions">No access requests yet.</div>';
-                        return;
-                    }
-                    
-                    // Sort by timestamp (newest first)
-                    const sortedSubmissions = submissions.sort((a, b) => 
-                        new Date(b.timestamp) - new Date(a.timestamp)
-                    );
-                    
-                    // Create table with enhanced information
-                    let html = `
-                        <div style="margin-bottom: 16px; display: flex; gap: 16px; align-items: center;">
-                            <span class="submission-count">${submissions.length} Total Requests</span>
-                            <span style="font-size: 14px; color: #666;">Last updated: ${new Date().toLocaleString()}</span>
-                        </div>
-                        <div style="overflow-x: auto;">
-                            <table class="submissions-table">
-                                <thead>
-                                    <tr>
-                                        <th>Date & Time</th>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Organization</th>
-                                        <th>Role</th>
-                                        <th>Referrer</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                    `;
-                    
-                    // Add rows with enhanced data
-                    sortedSubmissions.forEach((sub, index) => {
-                        const date = new Date(sub.timestamp);
-                        const formattedDate = date.toLocaleDateString();
-                        const formattedTime = date.toLocaleTimeString();
-                        const referrer = sub.referrer && sub.referrer !== 'Direct' ? 
-                            new URL(sub.referrer).hostname : 'Direct';
-                        
-                        html += `
-                            <tr style="${index % 2 === 0 ? 'background: #fafafa;' : ''}">
-                                <td style="white-space: nowrap;">
-                                    <div>${formattedDate}</div>
-                                    <div style="font-size: 12px; color: #666;">${formattedTime}</div>
-                                </td>
-                                <td style="font-weight: 500;">${this.escapeHtml(sub.name)}</td>
-                                <td><a href="mailto:${this.escapeHtml(sub.email)}" style="color: #0066cc;">${this.escapeHtml(sub.email)}</a></td>
-                                <td>${this.escapeHtml(sub.organization) || '-'}</td>
-                                <td>${this.escapeHtml(sub.role) || '-'}</td>
-                                <td style="font-size: 12px;">${this.escapeHtml(referrer)}</td>
-                            </tr>
-                        `;
-                    });
-                    
-                    html += '</tbody></table></div>';
-                    content.innerHTML = html;
-                    
-                } catch (error) {
-                    console.error('Error loading submissions:', error);
-                    const content = document.getElementById('submissionsContent');
-                    if (content) {
-                        content.innerHTML = '<div class="no-submissions" style="color: #e74c3c;">Error loading submissions. Please refresh and try again.</div>';
-                    }
-                }
-            },
-            
-            // Escape HTML to prevent XSS
-            escapeHtml(text) {
-                if (!text) return '';
-                const div = document.createElement('div');
-                div.textContent = text;
-                return div.innerHTML;
-            },
-            
-            // Clear all submissions with confirmation
-            clearAllSubmissions() {
-                if (!confirm('Are you sure you want to clear all submissions? This action cannot be undone.')) {
-                    return;
-                }
-                
-                try {
-                    localStorage.removeItem('proactivaSubmissions');
-                    this.loadSubmissions();
-                    alert('All submissions have been cleared successfully.');
-                    console.log('All submissions cleared by admin');
-                } catch (error) {
-                    console.error('Error clearing submissions:', error);
-                    alert('Error clearing submissions. Please try again.');
-                }
-            }
-        };
         
-        // Legacy function wrappers
-        function loadSubmissions() {
-            AdminDashboard.loadSubmissions();
-        }
-        
-        function clearAllSubmissions() {
-            AdminDashboard.clearAllSubmissions();
-        }
 
-        function clearAllSubmissions() {
-            if (confirm('Are you sure you want to clear all submissions? This cannot be undone.')) {
-                localStorage.removeItem('proactivaSubmissions');
-                loadSubmissions();
-                alert('All submissions have been cleared.');
-            }
-        }
+        
+
+
+
 
         // Initialize the application when DOM is ready
         function initializeApp() {

@@ -13,6 +13,9 @@
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏥</text></svg>">
     
+    <!-- Shared Styles -->
+    <link rel="stylesheet" href="/shared-styles.css">
+    
     <style>
         * {
             margin: 0;
@@ -76,6 +79,28 @@
         @keyframes gradientShift {
             0%, 100% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOutRight {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
         }
 
         /* Content display area */
@@ -413,7 +438,7 @@
     <!-- Content display area -->
     <div class="content-container">
         <p class="main-text">
-            <strong>The Veteran's Administration is about to experience unprecedented transformation.</strong> Rapid advancements in artificial intelligence, wearable technology, and digital health solutions are fundamentally changing how care is delivered, monitored, and optimized. <a href="/research/0702/" class="more-link">more →</a>
+            <strong>The Department of Veterans Affairs is undergoing the most significant technological transformation in its history.</strong> Rapid advancements in artificial intelligence, wearable technology, and digital health solutions are fundamentally changing how care is delivered, monitored, and optimized. <a href="/research/0701/" class="more-link">more →</a>
         </p>
         <h2 class="tagline">We are here to serve.</h2>
     </div>
@@ -458,8 +483,13 @@
                 
                 <button type="submit" class="form-submit" id="contactSubmitBtn">Send Message</button>
                 
-                <div class="success-message" id="contactSuccessMessage">
-                    Thank you for your message! We'll get back to you within 24 hours.
+                <div class="contact-success" id="contactSuccessMessage" style="display: none;">
+                    <div style="text-align: center; padding: 30px; background: white; border-radius: 8px;">
+                        <div style="font-size: 24px; color: #27ae60 !important; margin-bottom: 15px;">✓</div>
+                        <h3 style="color: #000000 !important; margin-bottom: 10px; font-weight: bold;">Thank you for your interest in Proactiva!</h3>
+                        <p style="color: #000000 !important; margin-bottom: 25px;">Someone will contact you soon.</p>
+                        <button onclick="hideContactModal()" style="background: #0066cc; color: white !important; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer; font-size: 14px;">← Back to Proactiva</button>
+                    </div>
                 </div>
                 
                 <div class="error-message" id="contactErrorMessage">
@@ -546,41 +576,176 @@
             }
         }
 
-        // Contact modal functions
+        // Unified Modal Manager
+        class ModalManager {
+            static show(modalId, focusElement = null) {
+                const modal = document.getElementById(modalId);
+                if (modal) {
+                    modal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                    
+                    // Auto-focus element if specified
+                    if (focusElement) {
+                        setTimeout(() => {
+                            const element = document.getElementById(focusElement);
+                            if (element) element.focus();
+                        }, 100);
+                    }
+                }
+            }
+
+            static hide(modalId) {
+                const modal = document.getElementById(modalId);
+                if (modal) {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                    
+                    // Reset modal content based on type
+                    if (modalId === 'contactModal') {
+                        this.resetContactForm();
+                    }
+                }
+            }
+
+            static resetContactForm() {
+                const form = document.getElementById('contactForm');
+                const submitBtn = document.getElementById('contactSubmitBtn');
+                const errorMsg = document.getElementById('contactErrorMessage');
+                const title = document.querySelector('.contact-title');
+                const subtitle = document.querySelector('.contact-subtitle');
+
+                if (form) form.reset();
+                if (errorMsg) errorMsg.style.display = 'none';
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Send Message';
+                }
+                if (title) title.style.display = 'block';
+                if (subtitle) subtitle.style.display = 'block';
+                if (form) form.style.display = 'block';
+            }
+
+            static initializeEventListeners() {
+                // Escape key handler
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape') {
+                        this.hide('contactModal');
+                    }
+                });
+            }
+        }
+
+        // Legacy function wrappers for backward compatibility
         function showContactModal() {
-            document.getElementById('contactModal').style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-            
-            // Focus first input
-            setTimeout(() => {
-                document.getElementById('contactName').focus();
-            }, 100);
+            ModalManager.show('contactModal', 'contactName');
         }
 
         function hideContactModal() {
-            document.getElementById('contactModal').style.display = 'none';
-            document.body.style.overflow = 'auto';
-            resetContactForm();
+            ModalManager.hide('contactModal');
         }
 
         function resetContactForm() {
-            document.getElementById('contactForm').reset();
-            document.getElementById('contactSuccessMessage').style.display = 'none';
-            document.getElementById('contactErrorMessage').style.display = 'none';
-            document.getElementById('contactSubmitBtn').disabled = false;
-            document.getElementById('contactSubmitBtn').textContent = 'Send Message';
+            ModalManager.resetContactForm();
         }
 
-        function handleContactSubmit(event) {
+        // Unified submission handler for all forms
+        class SubmissionManager {
+            static async submitForm(formData, formType = 'contact') {
+                const submissionData = {
+                    ...formData,
+                    timestamp: new Date().toISOString(),
+                    userAgent: navigator.userAgent,
+                    referrer: document.referrer || 'Direct',
+                    formType: formType
+                };
+
+                // Add form-specific defaults
+                if (formType === 'contact') {
+                    submissionData.role = 'Contact Form Submission';
+                    submissionData.organization = formData.organization || 'Not specified';
+                }
+
+                try {
+                    let submissions = JSON.parse(localStorage.getItem('proactivaSubmissions') || '[]');
+                    submissions.push(submissionData);
+                    localStorage.setItem('proactivaSubmissions', JSON.stringify(submissions));
+                    return { success: true, data: submissionData };
+                } catch (error) {
+                    return { success: false, error: error.message };
+                }
+            }
+
+            static validateForm(data, requiredFields) {
+                return requiredFields.every(field => data[field] && data[field].trim());
+            }
+
+            static showSuccessModal(modalSelector, title = 'Success!', message = 'Thank you for your submission!') {
+                const modal = document.querySelector(modalSelector);
+                if (!modal) {
+                    console.error('Modal not found:', modalSelector);
+                    return;
+                }
+                
+                modal.innerHTML = `
+                    <button class="modal-close" onclick="hideContactModal()">×</button>
+                    <div style="text-align: center; padding: 40px;">
+                        <h3 style="color: #000; margin-bottom: 20px; font-size: 24px; font-weight: 600;">${title}</h3>
+                        <div style="font-size: 48px; color: #27ae60; margin-bottom: 20px;">✓</div>
+                        <div style="color: #0066cc; font-size: 16px; font-weight: 500; margin-bottom: 20px;">${message}</div>
+                        <button onclick="hideContactModal()" style="color: #0066cc; text-decoration: none; font-size: 14px; cursor: pointer; display: inline-block; margin-top: 16px; background: none; border: none; padding: 0; font-family: inherit;">← Back</button>
+                    </div>
+                `;
+            }
+
+            static showError(message, duration = 5000) {
+                // Create or update error notification
+                let errorNotification = document.getElementById('error-notification');
+                if (!errorNotification) {
+                    errorNotification = document.createElement('div');
+                    errorNotification.id = 'error-notification';
+                    errorNotification.style.cssText = `
+                        position: fixed;
+                        top: 20px;
+                        right: 20px;
+                        background: #e74c3c;
+                        color: white;
+                        padding: 16px 24px;
+                        border-radius: 8px;
+                        box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+                        z-index: 10000;
+                        font-family: inherit;
+                        font-size: 14px;
+                        max-width: 400px;
+                        animation: slideInRight 0.3s ease-out;
+                    `;
+                    document.body.appendChild(errorNotification);
+                }
+                
+                errorNotification.textContent = message;
+                errorNotification.style.display = 'block';
+                
+                // Auto-hide after duration
+                setTimeout(() => {
+                    if (errorNotification && errorNotification.parentNode) {
+                        errorNotification.style.animation = 'slideOutRight 0.3s ease-in';
+                        setTimeout(() => {
+                            if (errorNotification && errorNotification.parentNode) {
+                                errorNotification.parentNode.removeChild(errorNotification);
+                            }
+                        }, 300);
+                    }
+                }, duration);
+            }
+        }
+
+        async function handleContactSubmit(event) {
             event.preventDefault();
             
             const form = event.target;
             const submitBtn = document.getElementById('contactSubmitBtn');
-            const successMsg = document.getElementById('contactSuccessMessage');
             const errorMsg = document.getElementById('contactErrorMessage');
             
-            // Hide messages
-            successMsg.style.display = 'none';
+            // Hide error message
             errorMsg.style.display = 'none';
             
             // Get form data
@@ -590,12 +755,11 @@
                 email: formData.get('contactEmail'),
                 organization: formData.get('contactOrganization'),
                 subject: formData.get('contactSubject'),
-                message: formData.get('contactMessage'),
-                timestamp: new Date().toISOString()
+                message: formData.get('contactMessage')
             };
             
-            // Basic validation
-            if (!data.name || !data.email || !data.message) {
+            // Validate required fields
+            if (!SubmissionManager.validateForm(data, ['name', 'email', 'message'])) {
                 errorMsg.style.display = 'block';
                 return;
             }
@@ -604,52 +768,40 @@
             submitBtn.disabled = true;
             submitBtn.textContent = 'Sending...';
             
-            // Store in localStorage (same as research hub system)
+            // Submit form
             try {
-                let contacts = JSON.parse(localStorage.getItem('proactivaContacts') || '[]');
-                contacts.push(data);
-                localStorage.setItem('proactivaContacts', JSON.stringify(contacts));
+                const result = await SubmissionManager.submitForm(data, 'contact');
                 
-                // Simulate sending delay
-                setTimeout(() => {
-                    successMsg.style.display = 'block';
-                    form.style.display = 'none';
-                    
-                    console.log('Contact form submitted:', data);
-                    console.log('All contacts:', contacts);
-                    
-                    // Reset after 3 seconds
+                if (result.success) {
+                    // Show success with delay for better UX
                     setTimeout(() => {
-                        hideContactModal();
-                        form.style.display = 'block';
-                    }, 3000);
-                }, 1000);
+                        SubmissionManager.showSuccessModal(
+                            '.contact-modal', 
+                            'Success!', 
+                            'Thank you for your interest in Proactiva! Someone will contact you soon.'
+                        );
+                        console.log('Contact form submitted:', result.data);
+                    }, 1000);
+                } else {
+                    throw new Error(result.error);
+                }
                 
             } catch (error) {
-                errorMsg.textContent = 'Error submitting form. Please try again.';
+                const errorMessage = 'Unable to submit form. Please check your connection and try again.';
+                errorMsg.textContent = errorMessage;
                 errorMsg.style.display = 'block';
+                SubmissionManager.showError(errorMessage);
+                
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Send Message';
+                console.error('Contact form error:', error);
             }
         }
-
-        // Close modal when clicking outside
-        document.addEventListener('click', (e) => {
-            if (e.target.id === 'contactModal') {
-                hideContactModal();
-            }
-        });
-
-        // Close modal on escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                hideContactModal();
-            }
-        });
 
         // Initialize when DOM is loaded
         document.addEventListener('DOMContentLoaded', () => {
             new BackgroundAnimation();
+            ModalManager.initializeEventListeners();
         });
 
         // Performance monitoring
@@ -665,5 +817,8 @@
             });
         }
     </script>
+    
+    <!-- Shared Scripts -->
+    <script src="/shared-scripts.js"></script>
 </body>
 </html>

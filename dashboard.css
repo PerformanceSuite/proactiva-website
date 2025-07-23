@@ -1,0 +1,234 @@
+/* PROACTIVA Communications Dashboard - Shared Styles */
+
+/* Dashboard modal sizing - centered */
+#loginModal.dashboard-mode .access-modal {
+    max-width: 1200px;
+    width: 95vw;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Keep login form normal size */
+#loginModal .login-form {
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+/* Admin Dashboard */
+.admin-dashboard {
+    display: none;
+    padding: 40px;
+    max-width: 1000px;
+    width: 90vw;
+    max-height: 85vh;
+    overflow-y: auto;
+    background: #fafbfc;
+    border-radius: 16px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.dashboard-logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.dashboard-logo .pro {
+    color: #0066cc;
+}
+
+.dashboard-logo .acti {
+    color: #0066cc;
+}
+
+.dashboard-logo .va {
+    color: #e74c3c;
+}
+
+.dashboard-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 36px;
+    font-weight: 700;
+    color: #e74c3c;
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    font-size: 14px;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.dashboard-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0;
+    text-align: center;
+}
+
+.submissions-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.submissions-table th {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 16px;
+    text-align: left;
+    font-weight: 700;
+    color: #333;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #e74c3c;
+}
+
+.submissions-table td {
+    padding: 16px;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 14px;
+}
+
+.submissions-table tr:hover {
+    background: #fafbfc;
+}
+
+.submissions-table tr:last-child td {
+    border-bottom: none;
+}
+
+.no-submissions {
+    text-align: center;
+    color: #666;
+    padding: 40px;
+    font-size: 16px;
+}
+
+.dashboard-actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Unified button system */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 28px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    font-family: inherit;
+    text-decoration: none;
+    min-width: 160px;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn--primary {
+    background: linear-gradient(135deg, #0066cc 0%, #004499 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
+}
+
+.btn--primary:hover {
+    background: linear-gradient(135deg, #0052a3 0%, #003366 100%);
+    box-shadow: 0 6px 20px rgba(0, 102, 204, 0.4);
+}
+
+.btn--danger {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+}
+
+.btn--danger:hover {
+    background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
+    box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+}
+
+/* Legacy class compatibility - maintaining old classes for backward compatibility */
+.dashboard-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 28px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    font-family: inherit;
+    min-width: 160px;
+}
+
+.dashboard-btn:hover {
+    transform: translateY(-2px);
+}
+
+.download-btn {
+    background: linear-gradient(135deg, #0066cc 0%, #004499 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
+}
+
+.download-btn:hover {
+    background: linear-gradient(135deg, #0052a3 0%, #003366 100%);
+    box-shadow: 0 6px 20px rgba(0, 102, 204, 0.4);
+}
+
+.clear-btn {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+}
+
+.clear-btn:hover {
+    background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
+    box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+}

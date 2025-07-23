@@ -12,6 +12,10 @@
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏥</text></svg>">
     <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏥</text></svg>">
+    
+    <!-- Shared Styles -->
+    <link rel="stylesheet" href="/shared-styles.css">
+    
     <style>
         * {
             margin: 0;
@@ -586,6 +590,15 @@
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             position: relative;
         }
+        
+        
+        /* Keep login form normal size */
+        #loginModal .login-form {
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            margin: 0 auto;
+        }
 
         .access-icon {
             font-size: 48px;
@@ -687,6 +700,10 @@
             cursor: pointer;
             display: inline-block;
             margin-top: 16px;
+            background: none;
+            border: none;
+            padding: 0;
+            font-family: inherit;
         }
 
         .back-link:hover {
@@ -798,6 +815,33 @@
                 padding: 30px 20px;
             }
         }
+
+        /* Login Form Styles */
+        .login-form {
+            display: none;
+            padding: 40px;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .login-error {
+            display: none;
+            background: #fee;
+            color: #e74c3c;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+
+
+        .dashboard-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+        }
+
 
         /* Print styles */
         @media print {
@@ -1068,6 +1112,77 @@
         </div>
     </div>
 
+    <!-- Login Modal -->
+    <div class="access-overlay" id="loginModal" role="dialog" aria-labelledby="login-title" aria-modal="true">
+        <div class="access-modal">
+            <button class="modal-close" onclick="hideLoginModal()" aria-label="Close login modal">×</button>
+            <div class="login-form" id="loginForm" style="display: block;">
+                <h3 class="access-title" id="login-title">Member Login</h3>
+                <div class="login-error" id="loginError" role="alert" aria-live="polite">Invalid credentials. Please try again.</div>
+                
+                <form onsubmit="handleLogin(event)" novalidate>
+                    <div class="form-group">
+                        <label class="form-label" for="loginUsername">Username</label>
+                        <input type="text" id="loginUsername" name="loginUsername" class="form-input" required autocomplete="username" aria-describedby="login-error">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" name="loginPassword" class="form-input" required autocomplete="current-password" aria-describedby="login-error">
+                    </div>
+                    
+                    <button type="submit" class="form-submit">Login</button>
+                    
+                    <p class="form-note" style="margin-top: 20px;">
+                        Not a member? <button type="button" onclick="switchToAccessRequest()" style="color: #e74c3c; background: none; border: none; text-decoration: underline; cursor: pointer;">Request access</button>
+                    </p>
+                </form>
+                
+                <button class="back-link" onclick="hideLoginModal()" type="button">← Back</button>
+            </div>
+            
+            <div class="admin-dashboard" id="adminDashboard" role="main">
+                <div class="dashboard-header">
+                    <div class="dashboard-logo">
+                        <span class="pro">PRO</span><span class="acti">ACTI</span><span class="va">VA</span>
+                    </div>
+                    <h2 class="dashboard-title">Communications Dashboard</h2>
+                </div>
+                
+                <div class="dashboard-stats" id="dashboardStats">
+                    <!-- Stats will be populated by JavaScript -->
+                </div>
+                
+                <div id="submissionsContent" role="region" aria-label="Submissions data">
+                    <!-- Content will be populated by JavaScript -->
+                </div>
+                
+                <div class="dashboard-actions">
+                    <button class="dashboard-btn download-btn" onclick="downloadSubmissionsCSV()" aria-label="Download submissions as CSV file">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 8px;">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        Download CSV
+                    </button>
+                    <button class="dashboard-btn clear-btn" onclick="clearAllSubmissions()" aria-label="Clear all submission data">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 8px;">
+                            <polyline points="3 6 5 6 21 6"></polyline>
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                        </svg>
+                        Clear All Data
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shared Components -->
+    <link rel="stylesheet" href="/dashboard.css">
+    <script src="/shared-scripts.js"></script>
+    <script src="/dashboard.js"></script>
+    
     <script>
         // Mobile menu toggle functionality
         function toggleMobileMenu() {
@@ -1167,11 +1282,7 @@
                 // Click outside handler for access modal
                 const accessModal = document.getElementById('accessModal');
                 if (accessModal) {
-                    accessModal.addEventListener('click', (e) => {
-                        if (e.target === accessModal) {
-                            this.hide('accessModal');
-                        }
-                    });
+                    // Removed: Close modal when clicking outside - now only closes on X click
                 }
             },
             
@@ -1247,15 +1358,30 @@
                 const successMsg = document.getElementById('successMessage');
                 const errorMsg = document.getElementById('errorMessage');
                 const submitBtn = document.getElementById('submitBtn');
+                const accessTitle = document.querySelector('#signupForm .access-title');
+                const backBtn = document.querySelector('#signupForm .back-link');
                 
                 if (modalContent) modalContent.style.display = 'block';
                 if (signupForm) signupForm.style.display = 'none';
                 if (accessForm) accessForm.reset();
-                if (successMsg) successMsg.style.display = 'none';
+                if (successMsg) {
+                    successMsg.style.display = 'none';
+                    successMsg.innerHTML = 'Thank you! We\'ll review your request and contact you within 24 hours.';
+                    successMsg.style.color = '';
+                    successMsg.style.textAlign = '';
+                }
                 if (errorMsg) errorMsg.style.display = 'none';
                 if (submitBtn) {
                     submitBtn.disabled = false;
                     submitBtn.textContent = 'Submit Request';
+                }
+                if (accessTitle) {
+                    accessTitle.textContent = 'Request Research Access';
+                    accessTitle.style.display = 'block';
+                    accessTitle.style.textAlign = '';
+                }
+                if (backBtn) {
+                    backBtn.onclick = function() { hideSignupForm(); };
                 }
             },
             
@@ -1290,7 +1416,11 @@
         
         // Legacy function wrappers for backward compatibility
         function showAccessModal() {
+            // Reset the access modal to clean state first
+            Modal.resetAccessModal();
+            // Show the modal and go directly to signup form
             Modal.show('accessModal');
+            Modal.showSignupForm();
         }
         
         function hideAccessModal() {
@@ -1309,10 +1439,19 @@
             Modal.resetAccessModal();
         }
 
-        // Login stub - redirect to research hub
+        // Show login modal
         function showLoginModal() {
-            alert('Please visit the Research Hub for member login.');
-            window.location.href = 'research-hub-landing.html';
+            Modal.show('loginModal');
+        }
+        
+        function hideLoginModal() {
+            // Check if we're in dashboard mode - if so, logout instead of just hiding
+            const loginModal = document.getElementById('loginModal');
+            if (loginModal && loginModal.classList.contains('dashboard-mode')) {
+                logout();
+            } else {
+                Modal.hide('loginModal');
+            }
         }
 
         // Enhanced form handling system
@@ -1475,6 +1614,103 @@
                 event.preventDefault();
                 callback();
             }
+        }
+        
+        // Login handler for admin authentication
+        const LoginHandler = {
+            attemptCount: 0,
+            lockoutTime: null,
+            lockoutDuration: 5 * 60 * 1000, // 5 minutes in milliseconds
+            
+            isLockedOut() {
+                if (this.lockoutTime && Date.now() - this.lockoutTime < this.lockoutDuration) {
+                    const remainingTime = Math.ceil((this.lockoutDuration - (Date.now() - this.lockoutTime)) / 1000);
+                    const minutes = Math.floor(remainingTime / 60);
+                    const seconds = remainingTime % 60;
+                    return {
+                        locked: true,
+                        message: `Too many failed attempts. Please try again in ${minutes}:${seconds.toString().padStart(2, '0')}`
+                    };
+                }
+                return { locked: false };
+            },
+            
+            handleLogin(event) {
+                event.preventDefault();
+                
+                // Check if locked out
+                const lockStatus = this.isLockedOut();
+                if (lockStatus.locked) {
+                    const loginError = document.getElementById('loginError');
+                    if (loginError) {
+                        loginError.textContent = lockStatus.message;
+                        loginError.style.display = 'block';
+                    }
+                    return;
+                }
+                
+                const username = document.getElementById('loginUsername').value;
+                const password = document.getElementById('loginPassword').value;
+                const loginError = document.getElementById('loginError');
+                
+                // Simple hardcoded authentication (for demonstration purposes)
+                if (username === 'admin' && password === 'proactiva2025') {
+                    // Reset attempt counter on successful login
+                    this.attemptCount = 0;
+                    this.lockoutTime = null;
+                    
+                    // Hide login form and show dashboard
+                    document.getElementById('loginForm').style.display = 'none';
+                    document.getElementById('adminDashboard').style.display = 'block';
+                    loginError.style.display = 'none';
+                    
+                    // Add dashboard mode class for larger modal
+                    document.getElementById('loginModal').classList.add('dashboard-mode');
+                    
+                    // Load submissions data
+                    loadSubmissionsData();
+                } else {
+                    // Increment attempt counter
+                    this.attemptCount++;
+                    
+                    if (this.attemptCount >= 5) {
+                        // Lock out after 5 attempts
+                        this.lockoutTime = Date.now();
+                        loginError.textContent = 'Too many failed attempts. Account locked for 5 minutes.';
+                    } else {
+                        loginError.textContent = `Invalid credentials. ${5 - this.attemptCount} attempts remaining.`;
+                    }
+                    
+                    loginError.style.display = 'block';
+                }
+            }
+        };
+        
+        function handleLogin(event) {
+            LoginHandler.handleLogin(event);
+        }
+        
+        function switchToAccessRequest() {
+            Modal.hide('loginModal');
+            setTimeout(() => {
+                Modal.show('accessModal');
+                Modal.showSignupForm();
+            }, 300);
+        }
+        
+        function logout() {
+            // Reset login handler attempt counter
+            LoginHandler.attemptCount = 0;
+            
+            // Remove dashboard mode class
+            document.getElementById('loginModal').classList.remove('dashboard-mode');
+            
+            // Reset the modal to login state (this also hides dashboard and shows login form)
+            Modal.resetLoginModal();
+            
+            // Close the modal
+            Modal.hide('loginModal');
+            console.log('Admin logged out');
         }
         
         // Initialize the application when DOM is ready
