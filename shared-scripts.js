@@ -519,7 +519,8 @@ function initializeProactiva() {
     window.proactivaLoginHandler = new ProactivaLoginHandler();
 
     // Global convenience functions for backward compatibility
-    window.showAccessModal = () => {
+    window.showAccessModal = () => window.proactivaModal.show('accessModal');
+    window.showSignupForm = () => {
         window.proactivaModal.show('accessModal');
         window.proactivaModal.showSignupForm();
     };
