@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary Meta Tags -->
+    <title>PROACTIVA - Healthcare Digital Transformation Research</title>
+    <meta name="title" content="PROACTIVA - Healthcare Digital Transformation Research">
+    <meta name="description" content="Leading research organization pioneering healthcare's digital transformation. Discover insights on AI, telehealth, and emerging technologies reshaping patient care.">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏥</text></svg>">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #ffffff;
+            color: #1a1a1a;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+
+        /* Background canvas */
+        .background-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        /* Logo container */
+        .logo-container {
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 100;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .logo-container:hover {
+            transform: translate(-50%, -50%) scale(1.05);
+        }
+
+        .main-logo {
+            font-size: clamp(3rem, 9vw, 6rem);
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            text-decoration: none;
+        }
+
+        .main-logo .pro {
+            color: #0066cc;
+        }
+
+        .main-logo .acti {
+            color: #0066cc;
+        }
+
+        .main-logo .va {
+            color: #e74c3c;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Content display area */
+        .content-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 800px;
+            z-index: 50;
+            text-align: center;
+        }
+
+        .main-text {
+            font-size: clamp(0.88rem, 2vw, 1.12rem);
+            color: rgba(26, 26, 26, 0.9);
+            line-height: 1.8;
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+
+        .main-text strong {
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        .tagline {
+            font-size: clamp(1.6rem, 4vw, 2.8rem);
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-top: 20px;
+        }
+
+        .more-link {
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-left: 4px;
+        }
+
+        .more-link:hover {
+            color: #e74c3c;
+            transform: translateX(3px);
+        }
+
+
+        /* Footer */
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(248, 248, 248, 0.95);
+            backdrop-filter: blur(10px);
+            color: #1a1a1a;
+            padding: 15px 20px;
+            text-align: center;
+            z-index: 100;
+            border-top: 1px solid rgba(26, 26, 26, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-logo {
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+
+        .footer-logo .pro, .footer-logo .acti {
+            color: #0066cc;
+        }
+
+        .footer-logo .va {
+            color: #e74c3c;
+        }
+
+        .footer-bottom {
+            color: rgba(26, 26, 26, 0.7);
+            font-size: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .footer-content {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .footer {
+                padding: 12px 20px;
+            }
+            
+            .footer-logo {
+                font-size: 14px;
+            }
+            
+            .footer-bottom {
+                font-size: 11px;
+            }
+        }
+
+
+        /* Contact Us Link */
+        .contact-link {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            color: rgba(26, 26, 26, 0.8);
+            background: rgba(26, 26, 26, 0.05);
+            border: 1px solid rgba(26, 26, 26, 0.2);
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 200;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-link:hover {
+            color: #ffffff;
+            background: rgba(231, 76, 60, 0.8);
+            border-color: rgba(231, 76, 60, 0.9);
+            transform: translateY(-1px);
+        }
+
+        /* Contact Modal */
+        .contact-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            backdrop-filter: blur(10px);
+            padding: 20px;
+        }
+
+        .contact-modal {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(26, 26, 26, 0.1);
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 32px;
+            height: 32px;
+            background: rgba(26, 26, 26, 0.05);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: rgba(26, 26, 26, 0.7);
+            transition: all 0.2s;
+        }
+
+        .modal-close:hover {
+            background: rgba(26, 26, 26, 0.1);
+            color: #1a1a1a;
+        }
+
+        .contact-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #1a1a1a;
+        }
+
+        .contact-subtitle {
+            color: rgba(26, 26, 26, 0.7);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: rgba(26, 26, 26, 0.9);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 14px 16px;
+            background: rgba(26, 26, 26, 0.05);
+            border: 1px solid rgba(26, 26, 26, 0.2);
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: inherit;
+            color: #1a1a1a;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #e74c3c;
+            background: rgba(26, 26, 26, 0.03);
+            box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+        }
+
+        .form-input::placeholder {
+            color: rgba(26, 26, 26, 0.5);
+        }
+
+        .form-textarea {
+            height: 100px;
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .form-submit {
+            background: #e74c3c;
+            color: white;
+            padding: 14px 32px;
+            border-radius: 8px;
+            border: none;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .form-submit:hover {
+            background: #c0392b;
+            transform: translateY(-1px);
+        }
+
+        .form-submit:disabled {
+            background: rgba(255, 255, 255, 0.2);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .success-message {
+            display: none;
+            color: #27ae60;
+            font-weight: 500;
+            margin-top: 20px;
+            text-align: center;
+            padding: 15px;
+        }
+
+        .error-message {
+            display: none;
+            color: #e74c3c;
+            font-weight: 500;
+            margin-top: 20px;
+            text-align: center;
+            padding: 15px;
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .logo-container {
+                top: 25%;
+            }
+            
+            .insight-container {
+                top: 50%;
+                width: 95%;
+                height: 150px;
+            }
+            
+            .insight-element {
+                padding: 15px;
+            }
+
+            .contact-link {
+                top: 20px;
+                right: 20px;
+                padding: 10px 16px;
+                font-size: 13px;
+            }
+
+            .contact-modal {
+                padding: 30px 20px;
+                margin: 0 10px;
+            }
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background canvas for particles -->
+    <canvas class="background-canvas" id="background-canvas"></canvas>
+
+    <!-- Main logo -->
+    <div class="logo-container">
+        <div class="main-logo">
+            <span class="pro">PRO</span><span class="acti">ACTI</span><span class="va">VA</span>
+        </div>
+    </div>
+
+    <!-- Content display area -->
+    <div class="content-container">
+        <p class="main-text">
+            <strong>The healthcare industry is experiencing unprecedented transformation.</strong> Rapid advancements in artificial intelligence, wearable technology, and digital health solutions are fundamentally changing how care is delivered, monitored, and optimized. <a href="/research/0702/" class="more-link">more →</a>
+        </p>
+        <h2 class="tagline">We are here to serve.</h2>
+    </div>
+
+    <!-- Contact Us Link -->
+    <button class="contact-link" onclick="showContactModal()">Contact Us</button>
+
+    <!-- Contact Modal -->
+    <div class="contact-overlay" id="contactModal">
+        <div class="contact-modal">
+            <button class="modal-close" onclick="hideContactModal()">×</button>
+            <h3 class="contact-title">Contact PROACTIVA</h3>
+            <p class="contact-subtitle">
+                Get in touch with our research team to discuss partnerships, data access, or custom research projects.
+            </p>
+            
+            <form id="contactForm" onsubmit="handleContactSubmit(event)">
+                <div class="form-group">
+                    <label class="form-label" for="contactName">Full Name *</label>
+                    <input type="text" id="contactName" name="contactName" class="form-input" required placeholder="Your full name">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="contactEmail">Email Address *</label>
+                    <input type="email" id="contactEmail" name="contactEmail" class="form-input" required placeholder="your.email@company.com">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="contactOrganization">Organization</label>
+                    <input type="text" id="contactOrganization" name="contactOrganization" class="form-input" placeholder="Your organization">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="contactSubject">Subject</label>
+                    <input type="text" id="contactSubject" name="contactSubject" class="form-input" placeholder="What can we help you with?">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="contactMessage">Message *</label>
+                    <textarea id="contactMessage" name="contactMessage" class="form-input form-textarea" required placeholder="Tell us about your project or inquiry..."></textarea>
+                </div>
+                
+                <button type="submit" class="form-submit" id="contactSubmitBtn">Send Message</button>
+                
+                <div class="success-message" id="contactSuccessMessage">
+                    Thank you for your message! We'll get back to you within 24 hours.
+                </div>
+                
+                <div class="error-message" id="contactErrorMessage">
+                    Please fill in all required fields.
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-logo" aria-label="PROACTIVA">
+                <span class="pro">PRO</span><span class="acti">ACTI</span><span class="va">VA</span>
+            </div>
+            <div class="footer-bottom">
+                © 2025 Proactiva LLC. All research and data are proprietary.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple background animation
+        class BackgroundAnimation {
+            constructor() {
+                this.canvas = document.getElementById('background-canvas');
+                this.ctx = this.canvas.getContext('2d');
+                
+                this.init();
+                this.animate();
+            }
+
+            init() {
+                this.resizeCanvas();
+                window.addEventListener('resize', () => this.resizeCanvas());
+            }
+
+            resizeCanvas() {
+                this.canvas.width = window.innerWidth;
+                this.canvas.height = window.innerHeight;
+            }
+
+            animate() {
+                // Draw subtle background
+                this.drawBackground();
+                requestAnimationFrame(() => this.animate());
+            }
+
+            drawBackground() {
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                
+                // Draw very subtle grid
+                this.ctx.strokeStyle = 'rgba(26, 26, 26, 0.02)';
+                this.ctx.lineWidth = 1;
+                
+                const gridSize = 80;
+                for (let x = 0; x < this.canvas.width; x += gridSize) {
+                    this.ctx.beginPath();
+                    this.ctx.moveTo(x, 0);
+                    this.ctx.lineTo(x, this.canvas.height);
+                    this.ctx.stroke();
+                }
+                
+                for (let y = 0; y < this.canvas.height; y += gridSize) {
+                    this.ctx.beginPath();
+                    this.ctx.moveTo(0, y);
+                    this.ctx.lineTo(this.canvas.width, y);
+                    this.ctx.stroke();
+                }
+
+                // Draw ambient particles
+                const time = Date.now() * 0.001;
+                for (let i = 0; i < 15; i++) {
+                    const x = (Math.sin(time * 0.3 + i * 0.5) * 0.5 + 0.5) * this.canvas.width;
+                    const y = (Math.cos(time * 0.2 + i * 0.3) * 0.5 + 0.5) * this.canvas.height;
+                    const opacity = 0.08 * Math.sin(time * 2 + i) + 0.04;
+                    
+                    this.ctx.fillStyle = `rgba(26, 26, 26, ${opacity})`;
+                    this.ctx.beginPath();
+                    this.ctx.arc(x, y, 1.5, 0, Math.PI * 2);
+                    this.ctx.fill();
+                }
+            }
+        }
+
+        // Contact modal functions
+        function showContactModal() {
+            document.getElementById('contactModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            
+            // Focus first input
+            setTimeout(() => {
+                document.getElementById('contactName').focus();
+            }, 100);
+        }
+
+        function hideContactModal() {
+            document.getElementById('contactModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            resetContactForm();
+        }
+
+        function resetContactForm() {
+            document.getElementById('contactForm').reset();
+            document.getElementById('contactSuccessMessage').style.display = 'none';
+            document.getElementById('contactErrorMessage').style.display = 'none';
+            document.getElementById('contactSubmitBtn').disabled = false;
+            document.getElementById('contactSubmitBtn').textContent = 'Send Message';
+        }
+
+        function handleContactSubmit(event) {
+            event.preventDefault();
+            
+            const form = event.target;
+            const submitBtn = document.getElementById('contactSubmitBtn');
+            const successMsg = document.getElementById('contactSuccessMessage');
+            const errorMsg = document.getElementById('contactErrorMessage');
+            
+            // Hide messages
+            successMsg.style.display = 'none';
+            errorMsg.style.display = 'none';
+            
+            // Get form data
+            const formData = new FormData(form);
+            const data = {
+                name: formData.get('contactName'),
+                email: formData.get('contactEmail'),
+                organization: formData.get('contactOrganization'),
+                subject: formData.get('contactSubject'),
+                message: formData.get('contactMessage'),
+                timestamp: new Date().toISOString()
+            };
+            
+            // Basic validation
+            if (!data.name || !data.email || !data.message) {
+                errorMsg.style.display = 'block';
+                return;
+            }
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+            
+            // Store in localStorage (same as research hub system)
+            try {
+                let contacts = JSON.parse(localStorage.getItem('proactivaContacts') || '[]');
+                contacts.push(data);
+                localStorage.setItem('proactivaContacts', JSON.stringify(contacts));
+                
+                // Simulate sending delay
+                setTimeout(() => {
+                    successMsg.style.display = 'block';
+                    form.style.display = 'none';
+                    
+                    console.log('Contact form submitted:', data);
+                    console.log('All contacts:', contacts);
+                    
+                    // Reset after 3 seconds
+                    setTimeout(() => {
+                        hideContactModal();
+                        form.style.display = 'block';
+                    }, 3000);
+                }, 1000);
+                
+            } catch (error) {
+                errorMsg.textContent = 'Error submitting form. Please try again.';
+                errorMsg.style.display = 'block';
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Send Message';
+            }
+        }
+
+        // Close modal when clicking outside
+        document.addEventListener('click', (e) => {
+            if (e.target.id === 'contactModal') {
+                hideContactModal();
+            }
+        });
+
+        // Close modal on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                hideContactModal();
+            }
+        });
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new BackgroundAnimation();
+        });
+
+        // Performance monitoring
+        if ('performance' in window) {
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    const perfData = performance.getEntriesByType('navigation')[0];
+                    console.log('Proactiva.us Performance:', {
+                        loadTime: perfData.loadEventEnd - perfData.fetchStart,
+                        domReady: perfData.domContentLoadedEventEnd - perfData.fetchStart
+                    });
+                }, 100);
+            });
+        }
+    </script>
+</body>
+</html>

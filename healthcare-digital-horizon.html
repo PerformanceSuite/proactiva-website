@@ -3,29 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <!-- Primary Meta Tags -->
-    <title>PROACTIVA Research Hub - VA's Digital Healthcare Transformation</title>
-    <meta name="title" content="PROACTIVA Research Hub - VA's Digital Healthcare Transformation">
-    <meta name="description" content="Pioneering research on healthcare's digital transformation and the technologies reshaping patient care delivery. Access exclusive insights on VA's $369B investment in healthcare innovation.">
-    <meta name="keywords" content="healthcare technology, digital transformation, VA healthcare, medical AI, telehealth, healthcare innovation, research hub, veterans affairs">
+    <title>PROACTIVA Research Hub - Healthcare's Digital Future</title>
+    <meta name="title" content="PROACTIVA Research Hub - Healthcare's Digital Future">
+    <meta name="description" content="Comprehensive analysis of emerging technologies transforming healthcare delivery. Access exclusive insights on AI, wearables, and digital therapeutics.">
+    <meta name="keywords" content="healthcare technology, digital transformation, medical AI, wearables, IoMT, digital therapeutics, healthcare innovation">
     <meta name="author" content="PROACTIVA Research">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://performancesuite.github.io/proactiva-website/">
+    <link rel="canonical" href="https://performancesuite.github.io/proactiva-website/healthcare-digital-horizon.html">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://performancesuite.github.io/proactiva-website/">
-    <meta property="og:title" content="PROACTIVA Research Hub - Healthcare Digital Transformation">
-    <meta property="og:description" content="Pioneering research on healthcare's digital transformation. Access exclusive insights on VA's $369B investment in healthcare innovation.">
+    <meta property="og:url" content="https://performancesuite.github.io/proactiva-website/healthcare-digital-horizon.html">
+    <meta property="og:title" content="PROACTIVA Research Hub - Healthcare's Digital Future">
+    <meta property="og:description" content="Comprehensive analysis of emerging technologies transforming healthcare delivery.">
     <meta property="og:image" content="https://performancesuite.github.io/proactiva-website/og-image.jpg">
     <meta property="og:site_name" content="PROACTIVA Research Hub">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://performancesuite.github.io/proactiva-website/">
-    <meta property="twitter:title" content="PROACTIVA Research Hub - Healthcare Digital Transformation">
-    <meta property="twitter:description" content="Pioneering research on healthcare's digital transformation. Access exclusive insights on VA's $369B investment.">
+    <meta property="twitter:url" content="https://performancesuite.github.io/proactiva-website/healthcare-digital-horizon.html">
+    <meta property="twitter:title" content="PROACTIVA Research Hub - Healthcare's Digital Future">
+    <meta property="twitter:description" content="Comprehensive analysis of emerging technologies transforming healthcare delivery.">
     <meta property="twitter:image" content="https://performancesuite.github.io/proactiva-website/twitter-image.jpg">
     
     <!-- Favicon -->
@@ -40,19 +39,25 @@
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "PROACTIVA Research Hub",
-        "description": "Pioneering research on healthcare's digital transformation and the technologies reshaping patient care delivery",
-        "url": "https://performancesuite.github.io/proactiva-website/",
-        "logo": "https://performancesuite.github.io/proactiva-website/logo.svg",
-        "sameAs": [],
-        "contactPoint": {
-            "@type": "ContactPoint",
-            "email": "research@proactiva.com",
-            "contactType": "research"
+        "@type": "Article",
+        "headline": "Healthcare's Digital Horizon: Emerging Technologies Transforming Patient Care",
+        "description": "Comprehensive analysis of emerging technologies transforming healthcare delivery, including AI, wearables, and digital therapeutics.",
+        "author": {
+            "@type": "Organization",
+            "name": "PROACTIVA Research Hub"
         },
-        "areaServed": "Global",
-        "knowsAbout": ["Healthcare Technology", "Digital Transformation", "Medical AI", "Telehealth", "Veterans Affairs Healthcare"]
+        "publisher": {
+            "@type": "Organization",
+            "name": "PROACTIVA Research Hub",
+            "url": "https://performancesuite.github.io/proactiva-website/"
+        },
+        "datePublished": "2025-01-01",
+        "dateModified": "2025-01-01",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://performancesuite.github.io/proactiva-website/healthcare-digital-horizon.html"
+        },
+        "about": ["Healthcare Technology", "Digital Transformation", "Medical AI", "Wearables", "Digital Therapeutics"]
     }
     </script>
     <style>
@@ -89,16 +94,6 @@
             backface-visibility: hidden;
         }
         
-        /* Lazy loading styles */
-        .lazy-load {
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        
-        .lazy-load.loaded {
-            opacity: 1;
-        }
-
         /* Prevent text selection on UI elements */
         button, .cta-button, .nav-link, .login-btn {
             -webkit-user-select: none;
@@ -449,13 +444,10 @@
             padding: 14px 32px;
             border-radius: 8px;
             text-decoration: none;
-            font-size: 16px;
+            font-size: 16;
             font-weight: 500;
             display: inline-block;
             transition: all 0.2s;
-            cursor: pointer;
-            border: none;
-            font-family: inherit;
         }
 
         .cta-button:hover {
@@ -749,129 +741,27 @@
             text-decoration: underline;
         }
 
-        /* Admin Dashboard */
-        .admin-dashboard {
-            display: none;
-            padding: 40px;
-            max-width: 800px;
-            width: 100%;
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-
-        .dashboard-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-
-        .dashboard-title {
-            font-size: 28px;
-            font-weight: 600;
-            color: #1a1a1a;
-        }
-
-        .logout-btn {
-            background: #666;
+        .cta-button {
+            background: #e74c3c;
             color: white;
-            padding: 8px 20px;
-            border-radius: 6px;
-            border: none;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .logout-btn:hover {
-            background: #555;
-        }
-
-        .submissions-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-
-        .submissions-table th {
-            background: #f8f9fa;
-            padding: 12px;
-            text-align: left;
-            font-weight: 600;
-            border-bottom: 2px solid #dee2e6;
-        }
-
-        .submissions-table td {
-            padding: 12px;
-            border-bottom: 1px solid #dee2e6;
-        }
-
-        .submissions-table tr:hover {
-            background: #f8f9fa;
-        }
-
-        .no-submissions {
-            text-align: center;
-            color: #666;
-            padding: 40px;
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
             font-size: 16px;
-        }
-
-        .dashboard-actions {
-            display: flex;
-            gap: 16px;
-            margin-top: 20px;
-        }
-
-        .dashboard-btn {
-            padding: 10px 20px;
-            border-radius: 6px;
-            border: none;
-            font-size: 14px;
-            cursor: pointer;
+            font-weight: 500;
+            display: inline-block;
             transition: all 0.2s;
+            cursor: pointer;
+            border: none;
             font-family: inherit;
         }
 
-        .download-btn {
-            background: #28a745;
-            color: white;
+        .cta-button:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
         }
 
-        .download-btn:hover {
-            background: #218838;
-        }
-
-        .clear-btn {
-            background: #dc3545;
-            color: white;
-        }
-
-        .clear-btn:hover {
-            background: #c82333;
-        }
-
-        .submission-count {
-            background: #e3f2fd;
-            color: #0066cc;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        /* Login Form */
-        .login-form {
-            display: none;
-        }
-
-        .login-error {
-            display: none;
-            color: #e74c3c;
-            font-size: 14px;
-            margin-bottom: 16px;
-            text-align: center;
-        }
+        /* Responsive */
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
@@ -1003,7 +893,7 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="hero" role="main">
+    <section class="hero">
         <div class="hero-content">
             <h1>PROACTIVA Research Hub</h1>
             <p class="hero-subtitle">
@@ -1013,126 +903,87 @@
     </section>
 
     <!-- Featured Article -->
-    <article class="featured-article" id="article" role="article">
+    <section class="featured-article">
         <div class="article-container">
-            <div class="article-label">Featured Brief</div>
-            <h1 class="article-title">The VA's Digital Transformation: A $369 Billion Investment in Veterans' Healthcare Future</h1>
-            <div class="article-meta">
-                <time datetime="2025-07">Executive Briefing • July 2025</time> • 
-                <span aria-label="Estimated reading time">10 min read</span>
-            </div>
+            <div class="article-label">Featured Research</div>
+            <h1 class="article-title">Healthcare's Digital Horizon: Emerging Technologies Transforming Patient Care</h1>
+            <div class="article-meta">Executive Briefing • July 2025 • 8 min read</div>
             
             <div class="article-content">
-                <p><strong>The Department of Veterans Affairs is undergoing the most significant technological transformation in its history.</strong> With a total FY2025 budget of $369.3 billion—a 9.8% increase over 2024—the VA is positioning itself at the forefront of healthcare innovation. This unprecedented investment includes $7.6 billion specifically allocated for information technology, with targeted funding for artificial intelligence, telehealth expansion, and cutting-edge treatment modalities.</p>
+                <p><strong>The healthcare industry is experiencing unprecedented transformation.</strong> Rapid advancements in artificial intelligence, wearable technology, and digital health solutions are fundamentally changing how care is delivered, monitored, and optimized. Our research indicates that healthcare will generate 36% faster data growth than other sectors by 2025, making technology adoption not just beneficial but essential for modern healthcare organizations.</p>
 
                 <div class="key-stat">
-                    <strong>7.3 million</strong> unique patients served with <strong>142.6 million</strong> outpatient visits projected for 2025
+                    <strong>$974.5 billion</strong> - Projected global healthcare IT market by 2027, growing at 19.8% CAGR
                 </div>
 
-                <h2>Legislative Catalysts Driving Transformation</h2>
+                <h2>Key Technologies Reshaping Healthcare</h2>
 
-                <p>Two landmark acts have fundamentally reshaped the VA healthcare landscape, creating both opportunities and imperatives for technological advancement:</p>
-
-                <h3>The PACT Act: Expanding Care for Toxic Exposure</h3>
+                <h3>1. Artificial Intelligence: The Foundation of Modern Healthcare</h3>
                 
-                <p>The Sergeant First Class Heath Robinson Honoring our Promise to Address Comprehensive Toxics (PACT) Act represents the largest expansion of VA healthcare eligibility in decades. With $24.5 billion allocated through the Toxic Exposures Fund (TEF) for 2025, the Act has:</p>
+                <p>AI has emerged as the cornerstone technology revolutionizing healthcare delivery. Our analysis shows that AI-enhanced diagnostic systems can identify pulmonary nodules with 94.4% sensitivity compared to 82.6% for radiologists alone. This represents a significant leap in diagnostic accuracy that directly translates to improved patient outcomes.</p>
 
+                <p>The applications extend far beyond imaging:</p>
                 <ul>
-                    <li>Enabled earlier healthcare eligibility for millions of Veterans exposed to toxic substances</li>
-                    <li>Screened 4.6 million Veterans for toxic exposure to date</li>
-                    <li>Created urgent demand for scalable, technology-enabled care delivery models</li>
+                    <li><strong>Predictive Analytics:</strong> AI models can now predict acute kidney injury up to 48 hours before clinical manifestation</li>
+                    <li><strong>Administrative Efficiency:</strong> Healthcare organizations report 42% reduction in administrative processing time</li>
+                    <li><strong>Revenue Optimization:</strong> AI-driven revenue cycle management increases net patient revenue by 3-5%</li>
                 </ul>
 
-                <h3>The MISSION Act: Integrating External Networks</h3>
-
-                <p>The MISSION Act's Veterans Community Care Program has transformed how Veterans access care, particularly in rural areas. This integration of external healthcare networks requires sophisticated interoperability solutions—a key driver of the VA's digital transformation initiatives.</p>
-
                 <div class="key-stat">
-                    <strong>32.5 million</strong> telehealth appointments completed in FY2024, with plans to eliminate all telehealth copayments
+                    <strong>31% improvement</strong> in diagnostic accuracy when clinicians collaborate with AI systems
                 </div>
 
-                <h2>Strategic Technology Investments</h2>
+                <h3>2. Wearable Technology: Continuous Care Beyond Hospital Walls</h3>
 
-                <h3>Artificial Intelligence: From Claims to Clinical Care</h3>
-                
-                <p>The VA's AI investments span the entire healthcare continuum:</p>
+                <p>The proliferation of wearable devices has enabled a paradigm shift from reactive to proactive healthcare. These devices now collect comprehensive health data including heart rate variability, blood oxygen saturation, sleep patterns, and glucose levels - all in real-time.</p>
 
                 <div class="tech-grid">
                     <div class="tech-card">
-                        <h4>Benefits Processing</h4>
-                        <p>$2 million allocated for AI in Veterans Benefits Administration to streamline claims processing and improve accuracy</p>
+                        <h4>Early Detection</h4>
+                        <p>AI-powered wearables identify health anomalies before symptoms become obvious, enabling earlier intervention</p>
                     </div>
                     <div class="tech-card">
-                        <h4>Clinical Research</h4>
-                        <p>$10 million dedicated to AI research for translating evidence into practice and piloting novel diagnostic tools</p>
+                        <h4>Chronic Disease Management</h4>
+                        <p>24/7 monitoring reduces clinic visits while improving outcomes through continuous data collection</p>
                     </div>
                     <div class="tech-card">
-                        <h4>Ambient Documentation</h4>
-                        <p>AI-powered scribe technology pilots aim to reduce provider burnout and improve patient interaction quality</p>
+                        <h4>Patient Engagement</h4>
+                        <p>Real-time feedback empowers patients to take control of their health, improving treatment adherence</p>
                     </div>
                 </div>
 
-                <p>Particularly innovative is the VA's use of predictive analytics for patient risk stratification, including tools like SAFE-Watch that proactively identify Veterans at risk of suicide—supporting the VA's top clinical priority.</p>
+                <h3>3. Remote Patient Monitoring and Home Healthcare</h3>
 
-                <h3>Telehealth and Remote Care Evolution</h3>
-
-                <p>The VA's telehealth expansion represents a fundamental shift in care delivery:</p>
+                <p>Our research shows that hospital-at-home programs demonstrate lower mortality rates across all major diagnosis groups, with 11 showing statistically significant improvements. The economic impact is equally compelling:</p>
 
                 <ul>
-                    <li><strong>ATLAS Sites:</strong> Grant program funding for Accessing Telehealth through Local Area Stations in non-VA facilities</li>
-                    <li><strong>Tele-Emergency Care:</strong> Direct connection with VA emergency providers for remote evaluation</li>
-                    <li><strong>TeleOncology:</strong> Connecting Veterans with cancer specialists regardless of geographic location</li>
-                    <li><strong>Wearable Integration:</strong> Testing synchronization of health tracking devices with the "Share My Health Data App"</li>
+                    <li>32% reduction in total care costs ($5,081 vs. $7,480 for traditional hospital care)</li>
+                    <li>Shorter lengths of stay (3.2 vs. 4.9 days)</li>
+                    <li>Dramatically lower delirium rates (9% vs. 24%)</li>
                 </ul>
 
-                <h3>Electronic Health Record Modernization</h3>
+                <h2>Navigating Implementation Challenges</h2>
 
-                <p>While the EHRM budget has been strategically reduced to $894 million (52% decrease), this "Reset" focuses on optimization rather than expansion—addressing clinician concerns and strengthening system foundations at six Federal EHR sites. The Veteran Interoperability Pledge (VIP), launched in October 2023, promises seamless data sharing between VA and non-VA health systems.</p>
+                <p>While the potential is immense, healthcare organizations face several critical challenges in technology adoption:</p>
 
-                <h2>Emerging Technologies and Future Innovations</h2>
+                <h3>Data Quality and Integration</h3>
+                <p>The massive volume of data generated by new technologies requires robust infrastructure and standardized protocols. Issues with sensor calibration, data silos, and non-standardized formats remain significant hurdles that organizations must address strategically.</p>
 
-                <h3>Virtual Reality and Simulation</h3>
-                <p>The VA SimLEARN program leverages VR for provider training, including "The Dementia Experience" to enhance empathy and understanding. VR applications extend to PTSD treatment, physical therapy enhancement, and chronic pain management.</p>
+                <h3>Privacy and Security</h3>
+                <p>As healthcare becomes increasingly digital, cybersecurity threats pose substantial risks. Compliance with HIPAA, GDPR, and other regulations while ensuring seamless data access for authorized providers requires sophisticated security architectures.</p>
 
-                <h3>Robotics and Automation</h3>
-                <p>Service Assisted Robots (SARs) are currently operational at 65 VA facilities, handling routine tasks to free healthcare professionals for direct patient care. Future applications include surgical assistance and pharmaceutical delivery systems.</p>
+                <h3>Health Equity Considerations</h3>
+                <p>Access to AI-powered solutions and digital health tools varies significantly across economic and geographic boundaries. Our research emphasizes the need for inclusive design and deployment strategies to prevent widening health disparities.</p>
 
-                <h3>Groundbreaking Research Initiatives</h3>
-                <p>The VA is pioneering innovative treatments, including the first VA-funded study on MDMA-assisted therapy for PTSD and alcohol use disorder in decades—signaling openness to cutting-edge therapeutic approaches.</p>
+                <h2>The Path Forward: Human-AI Collaboration</h2>
 
-                <div class="key-stat">
-                    <strong>$17.1 billion</strong> invested in mental health care with an additional <strong>$583 million</strong> for suicide prevention outreach
-                </div>
+                <p>The future of healthcare lies not in technology replacing human judgment, but in creating synergistic relationships where AI augments clinical decision-making. Healthcare organizations that successfully integrate these technologies while addressing implementation challenges will be positioned to deliver superior patient outcomes at lower costs.</p>
 
-                <h2>Critical Implementation Challenges</h2>
-
-                <p>Despite substantial investments, the VA faces significant hurdles:</p>
-
-                <h3>Workforce Transformation</h3>
-                <p>A significant portion of the VA's IT workforce is nearing retirement eligibility, creating urgency around knowledge transfer and talent acquisition. The "Hire Faster and More Competitively" initiative aims to streamline recruitment processes.</p>
-
-                <h3>Data Integration and Interoperability</h3>
-                <p>Integrating new technologies with existing systems remains complex due to data silos and non-standardized formats. The VIP initiative represents a critical step toward solving these challenges.</p>
-
-                <h3>Equity and Access</h3>
-                <p>Ensuring equitable access to digital health solutions across diverse Veteran populations, particularly in rural areas, requires continued investment in infrastructure and user-centered design.</p>
-
-                <h2>Strategic Implications for Healthcare Innovation</h2>
-
-                <p>The VA's transformation offers crucial insights for the broader healthcare ecosystem:</p>
-
-                <ul>
-                    <li><strong>Scale Advantage:</strong> With 7.3 million patients, the VA serves as a massive proving ground for healthcare technologies</li>
-                    <li><strong>Integration Model:</strong> The MISSION Act's hybrid approach demonstrates viable public-private healthcare integration</li>
-                    <li><strong>Innovation Adoption:</strong> From AI to MDMA therapy, the VA shows surprising agility in embracing emerging treatments</li>
-                    <li><strong>Outcome Focus:</strong> Emphasis on measurable improvements (48,000 homeless Veterans housed, exceeding goals) provides clear ROI metrics</li>
-                </ul>
-
-                <p>As the VA continues its journey toward becoming a High Reliability Organization (HRO), its investments in technology and innovation serve as a blueprint for healthcare transformation at scale. The convergence of legislative mandates, demographic pressures, and technological capabilities creates a unique moment for reimagining Veterans' healthcare—with implications extending far beyond the VA system.</p>
+                <p>As we move toward 2027, the winners in healthcare will be those who view digital transformation not as an IT project, but as a fundamental reimagining of care delivery models. The evidence is clear: the digital horizon is here, and it promises a future where healthcare is more precise, accessible, and effective than ever before.</p>
 
                 <div class="article-cta">
-                    <h3>Access Complete VA Technology Analysis</h3>
-                    <p>Explore detailed breakdowns of VA technology initiatives, vendor opportunities, and strategic recommendations for healthcare innovators</p>
+                    <h3>Access Complete Research</h3>
+                    <p>Dive deeper into our comprehensive analysis with full access to data, case studies, and strategic recommendations</p>
                     <button class="cta-button" onclick="showAccessModal()">Request Full Report</button>
                 </div>
             </div>
@@ -1140,51 +991,51 @@
     </section>
 
     <!-- Research Areas -->
-    <section class="research-areas" id="research" role="region" aria-labelledby="research-title">
+    <section class="research-areas" id="research">
         <div class="section-header">
-            <h2 class="section-title" id="research-title">Research Focus Areas</h2>
+            <h2 class="section-title">Research Focus Areas</h2>
             <p class="section-subtitle">
                 Comprehensive analysis across key healthcare transformation domains
             </p>
         </div>
-        <div class="research-grid" role="list">
-            <div class="research-card" onclick="showAccessModal()" role="listitem" tabindex="0" onkeypress="handleKeyPress(event, showAccessModal)" aria-label="Access AI & Machine Learning research">
-                <div class="research-icon" aria-hidden="true">🤖</div>
+        <div class="research-grid">
+            <div class="research-card" onclick="showAccessModal()">
+                <div class="research-icon">🤖</div>
                 <h3 class="research-title">AI & Machine Learning</h3>
                 <p class="research-description">
                     Deep analysis of AI applications in diagnostics, treatment planning, and operational efficiency
                 </p>
             </div>
-            <div class="research-card" onclick="showAccessModal()" role="listitem" tabindex="0" onkeypress="handleKeyPress(event, showAccessModal)" aria-label="Access Wearables & IoMT research">
-                <div class="research-icon" aria-hidden="true">⌚</div>
+            <div class="research-card" onclick="showAccessModal()">
+                <div class="research-icon">⌚</div>
                 <h3 class="research-title">Wearables & IoMT</h3>
                 <p class="research-description">
                     Evaluating the Internet of Medical Things and its impact on continuous patient monitoring
                 </p>
             </div>
-            <div class="research-card" onclick="showAccessModal()" role="listitem" tabindex="0" onkeypress="handleKeyPress(event, showAccessModal)" aria-label="Access Hospital Disruption Models research">
-                <div class="research-icon" aria-hidden="true">🏥</div>
+            <div class="research-card" onclick="showAccessModal()">
+                <div class="research-icon">🏥</div>
                 <h3 class="research-title">Hospital Disruption Models</h3>
                 <p class="research-description">
                     Tracking how startups and new care models are displacing traditional hospital systems
                 </p>
             </div>
-            <div class="research-card" onclick="showAccessModal()" role="listitem" tabindex="0" onkeypress="handleKeyPress(event, showAccessModal)" aria-label="Access Digital Therapeutics research">
-                <div class="research-icon" aria-hidden="true">📱</div>
+            <div class="research-card" onclick="showAccessModal()">
+                <div class="research-icon">📱</div>
                 <h3 class="research-title">Digital Therapeutics</h3>
                 <p class="research-description">
                     Evidence-based analysis of software-driven interventions and their clinical outcomes
                 </p>
             </div>
-            <div class="research-card" onclick="showAccessModal()" role="listitem" tabindex="0" onkeypress="handleKeyPress(event, showAccessModal)" aria-label="Access Cloud & Infrastructure research">
-                <div class="research-icon" aria-hidden="true">☁️</div>
+            <div class="research-card" onclick="showAccessModal()">
+                <div class="research-icon">☁️</div>
                 <h3 class="research-title">Cloud & Infrastructure</h3>
                 <p class="research-description">
                     Examining scalable healthcare IT architectures and their ROI implications
                 </p>
             </div>
-            <div class="research-card" onclick="showAccessModal()" role="listitem" tabindex="0" onkeypress="handleKeyPress(event, showAccessModal)" aria-label="Access Emerging Technologies research">
-                <div class="research-icon" aria-hidden="true">🔬</div>
+            <div class="research-card" onclick="showAccessModal()">
+                <div class="research-icon">🔬</div>
                 <h3 class="research-title">Emerging Technologies</h3>
                 <p class="research-description">
                     Forward-looking research on 3D bioprinting, robotics, and edge computing in healthcare
@@ -1194,9 +1045,9 @@
     </section>
 
     <!-- Footer -->
-    <footer class="footer" role="contentinfo">
+    <footer class="footer">
         <div class="footer-content">
-            <div class="footer-logo" aria-label="PROACTIVA Research Hub">
+            <div class="footer-logo">
                 <span class="pro">PRO</span><span class="acti">ACTI</span><span class="va">VA</span>
             </div>
             <nav class="footer-links" role="navigation" aria-label="Footer navigation">
@@ -1205,9 +1056,9 @@
                 <span class="footer-link" onclick="showAccessModal()" role="button" tabindex="0" onkeypress="handleKeyPress(event, showAccessModal)" aria-label="Contact Information">Contact</span>
                 <span class="footer-link" onclick="showAccessModal()" role="button" tabindex="0" onkeypress="handleKeyPress(event, showAccessModal)" aria-label="Privacy Policy">Privacy</span>
             </nav>
-            <div class="footer-divider" aria-hidden="true"></div>
+            <div class="footer-divider"></div>
             <div class="footer-bottom">
-                <small>© 2025 Proactiva LLC. All research and data are proprietary.</small>
+                © 2025 Proactiva LLC. All research and data are proprietary.
             </div>
         </div>
     </footer>
@@ -1261,57 +1112,6 @@
                 </form>
                 
                 <button class="back-link" onclick="hideSignupForm()" type="button">← Back</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Login Modal -->
-    <div class="access-overlay" id="loginModal" role="dialog" aria-labelledby="login-title" aria-modal="true">
-        <div class="access-modal">
-            <button class="modal-close" onclick="hideLoginModal()" aria-label="Close login modal">×</button>
-            <div class="login-form" id="loginForm" style="display: block;">
-                <h3 class="access-title" id="login-title">Member Login</h3>
-                <div class="login-error" id="loginError" role="alert" aria-live="polite">Invalid credentials. Please try again.</div>
-                
-                <form onsubmit="handleLogin(event)" novalidate>
-                    <div class="form-group">
-                        <label class="form-label" for="loginUsername">Username</label>
-                        <input type="text" id="loginUsername" name="loginUsername" class="form-input" required autocomplete="username" aria-describedby="login-error">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label" for="loginPassword">Password</label>
-                        <input type="password" id="loginPassword" name="loginPassword" class="form-input" required autocomplete="current-password" aria-describedby="login-error">
-                    </div>
-                    
-                    <button type="submit" class="form-submit">Login</button>
-                    
-                    <p class="form-note" style="margin-top: 20px;">
-                        Not a member? <button type="button" onclick="switchToAccessRequest()" style="color: #e74c3c; background: none; border: none; text-decoration: underline; cursor: pointer;">Request access</button>
-                    </p>
-                </form>
-                
-                <button class="back-link" onclick="hideLoginModal()" type="button">← Back</button>
-            </div>
-            
-            <div class="admin-dashboard" id="adminDashboard" role="main">
-                <div class="dashboard-header">
-                    <h2 class="dashboard-title">Access Requests Dashboard</h2>
-                    <button class="logout-btn" onclick="logout()" aria-label="Logout from admin dashboard">Logout</button>
-                </div>
-                
-                <div id="submissionsContent" role="region" aria-label="Submissions data">
-                    <!-- Content will be populated by JavaScript -->
-                </div>
-                
-                <div class="dashboard-actions">
-                    <button class="dashboard-btn download-btn" onclick="downloadSubmissionsCSV()" aria-label="Download submissions as CSV file">
-                        Download CSV
-                    </button>
-                    <button class="dashboard-btn clear-btn" onclick="clearAllSubmissions()" aria-label="Clear all submission data">
-                        Clear All Data
-                    </button>
-                </div>
             </div>
         </div>
     </div>
@@ -1421,16 +1221,6 @@
                         }
                     });
                 }
-                
-                // Click outside handler for login modal
-                const loginModal = document.getElementById('loginModal');
-                if (loginModal) {
-                    loginModal.addEventListener('click', (e) => {
-                        if (e.target === loginModal) {
-                            this.hide('loginModal');
-                        }
-                    });
-                }
             },
             
             // Show modal with proper state management
@@ -1479,8 +1269,6 @@
                 // Modal-specific cleanup
                 if (modalId === 'accessModal') {
                     this.resetAccessModal();
-                } else if (modalId === 'loginModal') {
-                    this.resetLoginModal();
                 }
                 
                 return true;
@@ -1497,7 +1285,6 @@
                 this.openModals.clear();
                 document.body.style.overflow = 'auto';
                 this.resetAccessModal();
-                this.resetLoginModal();
             },
             
             // Reset access modal to initial state
@@ -1518,21 +1305,6 @@
                     submitBtn.disabled = false;
                     submitBtn.textContent = 'Submit Request';
                 }
-            },
-            
-            // Reset login modal to initial state
-            resetLoginModal() {
-                const loginForm = document.getElementById('loginForm');
-                const adminDashboard = document.getElementById('adminDashboard');
-                const loginError = document.getElementById('loginError');
-                const loginUsername = document.getElementById('loginUsername');
-                const loginPassword = document.getElementById('loginPassword');
-                
-                if (loginForm) loginForm.style.display = 'block';
-                if (adminDashboard) adminDashboard.style.display = 'none';
-                if (loginError) loginError.style.display = 'none';
-                if (loginUsername) loginUsername.value = '';
-                if (loginPassword) loginPassword.value = '';
             },
             
             // Show access modal signup form
@@ -1583,6 +1355,12 @@
         
         function resetForm() {
             Modal.resetAccessModal();
+        }
+
+        // Login stub - redirect to research hub
+        function showLoginModal() {
+            alert('Please visit the Research Hub for member login.');
+            window.location.href = 'research-hub-landing.html';
         }
 
         // Enhanced form handling system
@@ -1707,14 +1485,6 @@
                     // Save submission
                     this.saveSubmission(data);
                     
-                    // Create email body for potential manual sending
-                    const emailBody = `New Access Request from PROACTIVA Research Hub\n\n` +
-                        `Name: ${data.name}\n` +
-                        `Email: ${data.email}\n` +
-                        `Organization: ${data.organization || 'Not provided'}\n` +
-                        `Role: ${data.role || 'Not provided'}\n` +
-                        `Submitted: ${data.timestamp}`;
-                    
                     // Show success message
                     if (successMsg) {
                         successMsg.style.display = 'block';
@@ -1747,294 +1517,14 @@
             FormHandler.handleSubmit(event);
         }
         
-        // Function to download all submissions as CSV
-        function downloadSubmissionsCSV() {
-            const submissions = JSON.parse(localStorage.getItem('proactivaSubmissions') || '[]');
-            
-            if (submissions.length === 0) {
-                alert('No submissions to download');
-                return;
-            }
-            
-            // Create CSV content
-            const headers = ['Name', 'Email', 'Organization', 'Role', 'Timestamp'];
-            const csvContent = [
-                headers.join(','),
-                ...submissions.map(sub => [
-                    `"${sub.name}"`,
-                    `"${sub.email}"`,
-                    `"${sub.organization || ''}"`,
-                    `"${sub.role || ''}"`,
-                    `"${sub.timestamp}"`
-                ].join(','))
-            ].join('\n');
-            
-            // Create and download file
-            const blob = new Blob([csvContent], { type: 'text/csv' });
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `proactiva-submissions-${new Date().toISOString().split('T')[0]}.csv`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            window.URL.revokeObjectURL(url);
-        }
-        
-        // Function to view all submissions (for admin use)
-        function viewSubmissions() {
-            const submissions = JSON.parse(localStorage.getItem('proactivaSubmissions') || '[]');
-            console.table(submissions);
-            return submissions;
-        }
-        
-        // Function to clear all submissions (for admin use)
-        function clearSubmissions() {
-            if (confirm('Are you sure you want to clear all submissions?')) {
-                localStorage.removeItem('proactivaSubmissions');
-                console.log('All submissions cleared');
-            }
-        }
-
-        // Login functionality
-        function showLoginModal() {
-            Modal.show('loginModal');
-        }
-        
-        function hideLoginModal() {
-            Modal.hide('loginModal');
-        }
-
-        // Enhanced login handling
-        const LoginHandler = {
-            // Rate limiting for login attempts
-            attemptCount: 0,
-            lastAttempt: 0,
-            maxAttempts: 5,
-            lockoutDuration: 5 * 60 * 1000, // 5 minutes
-            
-            // Check if login is rate limited
-            isRateLimited() {
-                const now = Date.now();
-                if (this.attemptCount >= this.maxAttempts) {
-                    if (now - this.lastAttempt < this.lockoutDuration) {
-                        return true;
-                    } else {
-                        // Reset after lockout period
-                        this.attemptCount = 0;
-                    }
-                }
-                return false;
-            },
-            
-            // Record login attempt
-            recordAttempt() {
-                this.attemptCount++;
-                this.lastAttempt = Date.now();
-            },
-            
-            // Handle login form submission
-            handleLogin(event) {
+        // Keyboard navigation helper
+        function handleKeyPress(event, callback) {
+            if (event.key === 'Enter' || event.key === ' ') {
                 event.preventDefault();
-                
-                const usernameInput = document.getElementById('loginUsername');
-                const passwordInput = document.getElementById('loginPassword');
-                const loginError = document.getElementById('loginError');
-                const loginForm = document.getElementById('loginForm');
-                const adminDashboard = document.getElementById('adminDashboard');
-                
-                if (!usernameInput || !passwordInput) {
-                    console.error('Login form elements not found');
-                    return;
-                }
-                
-                const username = usernameInput.value.trim();
-                const password = passwordInput.value;
-                
-                // Check rate limiting
-                if (this.isRateLimited()) {
-                    const remainingTime = Math.ceil((this.lockoutDuration - (Date.now() - this.lastAttempt)) / 1000 / 60);
-                    if (loginError) {
-                        loginError.textContent = `Too many failed attempts. Please try again in ${remainingTime} minute(s).`;
-                        loginError.style.display = 'block';
-                    }
-                    return;
-                }
-                
-                // Validate credentials (in production, this should be server-side)
-                if (username === 'admin' && password === 'proactiva2025') {
-                    // Reset attempt counter on successful login
-                    this.attemptCount = 0;
-                    
-                    // Show dashboard
-                    if (loginForm) loginForm.style.display = 'none';
-                    if (adminDashboard) adminDashboard.style.display = 'block';
-                    if (loginError) loginError.style.display = 'none';
-                    
-                    // Load submissions
-                    AdminDashboard.loadSubmissions();
-                    
-                    console.log('Admin login successful');
-                } else {
-                    // Record failed attempt
-                    this.recordAttempt();
-                    
-                    // Show error
-                    if (loginError) {
-                        loginError.textContent = 'Invalid credentials. Please try again.';
-                        loginError.style.display = 'block';
-                    }
-                    
-                    // Clear password field
-                    passwordInput.value = '';
-                    passwordInput.focus();
-                    
-                    console.warn('Failed login attempt');
-                }
-            }
-        };
-        
-        // Login form handler
-        function handleLogin(event) {
-            LoginHandler.handleLogin(event);
-        }
-
-        function switchToAccessRequest() {
-            Modal.hide('loginModal');
-            setTimeout(() => {
-                Modal.show('accessModal');
-            }, 300);
-        }
-        
-        function logout() {
-            // Reset login handler attempt counter
-            LoginHandler.attemptCount = 0;
-            Modal.hide('loginModal');
-            console.log('Admin logged out');
-        }
-
-        // Enhanced admin dashboard
-        const AdminDashboard = {
-            // Load and display submissions
-            loadSubmissions() {
-                try {
-                    const submissions = JSON.parse(localStorage.getItem('proactivaSubmissions') || '[]');
-                    const content = document.getElementById('submissionsContent');
-                    
-                    if (!content) {
-                        console.error('Submissions content element not found');
-                        return;
-                    }
-                    
-                    if (submissions.length === 0) {
-                        content.innerHTML = '<div class="no-submissions">No access requests yet.</div>';
-                        return;
-                    }
-                    
-                    // Sort by timestamp (newest first)
-                    const sortedSubmissions = submissions.sort((a, b) => 
-                        new Date(b.timestamp) - new Date(a.timestamp)
-                    );
-                    
-                    // Create table with enhanced information
-                    let html = `
-                        <div style="margin-bottom: 16px; display: flex; gap: 16px; align-items: center;">
-                            <span class="submission-count">${submissions.length} Total Requests</span>
-                            <span style="font-size: 14px; color: #666;">Last updated: ${new Date().toLocaleString()}</span>
-                        </div>
-                        <div style="overflow-x: auto;">
-                            <table class="submissions-table">
-                                <thead>
-                                    <tr>
-                                        <th>Date & Time</th>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Organization</th>
-                                        <th>Role</th>
-                                        <th>Referrer</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                    `;
-                    
-                    // Add rows with enhanced data
-                    sortedSubmissions.forEach((sub, index) => {
-                        const date = new Date(sub.timestamp);
-                        const formattedDate = date.toLocaleDateString();
-                        const formattedTime = date.toLocaleTimeString();
-                        const referrer = sub.referrer && sub.referrer !== 'Direct' ? 
-                            new URL(sub.referrer).hostname : 'Direct';
-                        
-                        html += `
-                            <tr style="${index % 2 === 0 ? 'background: #fafafa;' : ''}">
-                                <td style="white-space: nowrap;">
-                                    <div>${formattedDate}</div>
-                                    <div style="font-size: 12px; color: #666;">${formattedTime}</div>
-                                </td>
-                                <td style="font-weight: 500;">${this.escapeHtml(sub.name)}</td>
-                                <td><a href="mailto:${this.escapeHtml(sub.email)}" style="color: #0066cc;">${this.escapeHtml(sub.email)}</a></td>
-                                <td>${this.escapeHtml(sub.organization) || '-'}</td>
-                                <td>${this.escapeHtml(sub.role) || '-'}</td>
-                                <td style="font-size: 12px;">${this.escapeHtml(referrer)}</td>
-                            </tr>
-                        `;
-                    });
-                    
-                    html += '</tbody></table></div>';
-                    content.innerHTML = html;
-                    
-                } catch (error) {
-                    console.error('Error loading submissions:', error);
-                    const content = document.getElementById('submissionsContent');
-                    if (content) {
-                        content.innerHTML = '<div class="no-submissions" style="color: #e74c3c;">Error loading submissions. Please refresh and try again.</div>';
-                    }
-                }
-            },
-            
-            // Escape HTML to prevent XSS
-            escapeHtml(text) {
-                if (!text) return '';
-                const div = document.createElement('div');
-                div.textContent = text;
-                return div.innerHTML;
-            },
-            
-            // Clear all submissions with confirmation
-            clearAllSubmissions() {
-                if (!confirm('Are you sure you want to clear all submissions? This action cannot be undone.')) {
-                    return;
-                }
-                
-                try {
-                    localStorage.removeItem('proactivaSubmissions');
-                    this.loadSubmissions();
-                    alert('All submissions have been cleared successfully.');
-                    console.log('All submissions cleared by admin');
-                } catch (error) {
-                    console.error('Error clearing submissions:', error);
-                    alert('Error clearing submissions. Please try again.');
-                }
-            }
-        };
-        
-        // Legacy function wrappers
-        function loadSubmissions() {
-            AdminDashboard.loadSubmissions();
-        }
-        
-        function clearAllSubmissions() {
-            AdminDashboard.clearAllSubmissions();
-        }
-
-        function clearAllSubmissions() {
-            if (confirm('Are you sure you want to clear all submissions? This cannot be undone.')) {
-                localStorage.removeItem('proactivaSubmissions');
-                loadSubmissions();
-                alert('All submissions have been cleared.');
+                callback();
             }
         }
-
+        
         // Initialize the application when DOM is ready
         function initializeApp() {
             // Initialize modal system
@@ -2074,110 +1564,14 @@
                 }
             }
             
-            console.log('PROACTIVA Research Hub application initialized successfully');
-        }
-        
-        // Keyboard navigation helper
-        function handleKeyPress(event, callback) {
-            if (event.key === 'Enter' || event.key === ' ') {
-                event.preventDefault();
-                callback();
-            }
-        }
-        
-        // Performance monitoring
-        const PerformanceMonitor = {
-            init() {
-                // Measure and log performance metrics
-                if ('performance' in window) {
-                    window.addEventListener('load', () => {
-                        setTimeout(() => {
-                            const perfData = performance.getEntriesByType('navigation')[0];
-                            console.log('Page Load Performance:', {
-                                domContentLoaded: perfData.domContentLoadedEventEnd - perfData.domContentLoadedEventStart,
-                                loadComplete: perfData.loadEventEnd - perfData.loadEventStart,
-                                totalTime: perfData.loadEventEnd - perfData.fetchStart
-                            });
-                        }, 0);
-                    });
-                }
-            }
-        };
-        
-        // Enhanced initialization with accessibility and performance
-        function initializeAppWithOptimizations() {
-            // Add skip link for accessibility
-            const skipLink = document.createElement('a');
-            skipLink.href = '#article';
-            skipLink.className = 'skip-link';
-            skipLink.textContent = 'Skip to main content';
-            document.body.insertBefore(skipLink, document.body.firstChild);
-            
-            // Initialize existing app
-            initializeApp();
-            
-            // Initialize performance monitoring
-            PerformanceMonitor.init();
-            
-            // Enhanced form validation
-            const accessForm = document.getElementById('accessForm');
-            if (accessForm) {
-                const nameInput = document.getElementById('name');
-                const emailInput = document.getElementById('email');
-                const nameError = document.getElementById('name-error');
-                const emailError = document.getElementById('email-error');
-                
-                if (nameInput && nameError) {
-                    nameInput.addEventListener('input', function() {
-                        const value = this.value.trim();
-                        let errorMsg = '';
-                        
-                        if (value.length > 0 && value.length < 2) {
-                            errorMsg = 'Name must be at least 2 characters long';
-                        } else if (value.length > 100) {
-                            errorMsg = 'Name is too long (maximum 100 characters)';
-                        }
-                        
-                        if (errorMsg) {
-                            this.setCustomValidity(errorMsg);
-                            nameError.textContent = errorMsg;
-                            nameError.classList.add('show');
-                        } else {
-                            this.setCustomValidity('');
-                            nameError.classList.remove('show');
-                        }
-                    });
-                }
-                
-                if (emailInput && emailError) {
-                    emailInput.addEventListener('input', function() {
-                        const value = this.value.trim();
-                        let errorMsg = '';
-                        
-                        if (value && !FormHandler.isValidEmail(value)) {
-                            errorMsg = 'Please enter a valid email address';
-                        }
-                        
-                        if (errorMsg) {
-                            this.setCustomValidity(errorMsg);
-                            emailError.textContent = errorMsg;
-                            emailError.classList.add('show');
-                        } else {
-                            this.setCustomValidity('');
-                            emailError.classList.remove('show');
-                        }
-                    });
-                }
-            }
-            
-            console.log('PROACTIVA Research Hub fully optimized and initialized');
+            console.log('PROACTIVA Healthcare Digital Horizon page initialized successfully');
         }
         
         // Initialize when DOM is ready
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initializeAppWithOptimizations);
+            document.addEventListener('DOMContentLoaded', initializeApp);
         } else {
-            initializeAppWithOptimizations();
+            initializeApp();
         }
         
         // Error handling
