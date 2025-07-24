@@ -18,769 +18,7 @@
     <link rel="stylesheet" href="/shared-styles.css">
     <link rel="stylesheet" href="/research-common.css">
     
-    <style>
-
-        body {
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            font-display: swap;
-            scroll-behavior: smooth;
-        }
-        
-        /* Performance optimizations */
-        
-        /* Critical CSS optimizations */
-        .header {
-            will-change: transform;
-            backface-visibility: hidden;
-        }
-        
-        .research-card, .cta-button, .login-btn {
-            will-change: transform;
-            backface-visibility: hidden;
-        }
-        
-
-        /* Prevent text selection on UI elements */
-        button, .cta-button, .nav-link, .login-btn {
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-
-        /* Header */
-        .header {
-            background: #fff;
-            border-bottom: 1px solid #e5e5e5;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.95);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 70px;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: 800;
-            text-decoration: none;
-            letter-spacing: -0.5px;
-            cursor: pointer;
-        }
-
-        .logo .pro {
-            color: #0066cc;
-        }
-
-        .logo .acti {
-            color: #0066cc;
-        }
-
-        .logo .va {
-            color: #e74c3c;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 40px;
-            align-items: center;
-        }
-
-        .nav-link {
-            color: #666;
-            text-decoration: none;
-            font-size: 15px;
-            transition: color 0.2s;
-            cursor: pointer;
-        }
-
-        .nav-link:hover {
-            color: #e74c3c;
-        }
-
-        .login-btn {
-            background: #e74c3c;
-            color: white;
-            padding: 8px 20px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-size: 15px;
-            transition: all 0.2s;
-            cursor: pointer;
-            border: none;
-            font-family: inherit;
-        }
-
-        .login-btn:hover {
-            background: #c0392b;
-            transform: translateY(-1px);
-        }
-
-        /* Mobile Navigation */
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 8px;
-        }
-
-        .mobile-menu-btn span {
-            display: block;
-            width: 24px;
-            height: 2px;
-            background: #666;
-            margin: 5px 0;
-            transition: all 0.3s;
-        }
-
-        .mobile-menu-btn.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-
-        .mobile-menu-btn.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .mobile-menu-btn.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -6px);
-        }
-
-        .mobile-menu {
-            display: none;
-            position: fixed;
-            top: 70px;
-            left: 0;
-            right: 0;
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid #e5e5e5;
-            z-index: 999;
-            padding: 20px;
-        }
-
-        .mobile-menu.active {
-            display: block;
-        }
-
-        .mobile-menu-links {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            align-items: center;
-        }
-
-        .mobile-menu-link {
-            color: #666;
-            text-decoration: none;
-            font-size: 16px;
-            padding: 12px 20px;
-            border-radius: 8px;
-            transition: all 0.2s;
-            cursor: pointer;
-            display: block;
-            text-align: center;
-            width: 100%;
-            max-width: 200px;
-        }
-
-        .mobile-menu-link:hover {
-            color: #e74c3c;
-            background: rgba(231, 76, 60, 0.1);
-        }
-
-        .mobile-login-btn {
-            background: #e74c3c;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 16px;
-            transition: all 0.2s;
-            cursor: pointer;
-            border: none;
-            font-family: inherit;
-            display: block;
-            text-align: center;
-            width: 100%;
-            max-width: 200px;
-        }
-
-        .mobile-login-btn:hover {
-            background: #c0392b;
-            transform: translateY(-1px);
-        }
-
-        /* Page-specific hero positioning */
-        .hero {
-            margin-top: 70px;
-        }
-
-        /* Featured Article */
-        .featured-article {
-            padding: 60px 20px;
-            background: white;
-        }
-
-        .article-container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .article-label {
-            color: #e74c3c;
-            font-size: 14px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 16px;
-        }
-
-        .article-title {
-            font-size: 36px;
-            font-weight: 700;
-            margin-bottom: 16px;
-            color: #1a1a1a;
-            line-height: 1.2;
-        }
-
-        .article-meta {
-            color: #666;
-            font-size: 16px;
-            margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #e5e5e5;
-        }
-
-        .article-content {
-            font-size: 17px;
-            line-height: 1.8;
-            color: #333;
-        }
-
-        .article-content h2 {
-            font-size: 28px;
-            font-weight: 600;
-            margin-top: 40px;
-            margin-bottom: 20px;
-            color: #1a1a1a;
-        }
-
-        .article-content h3 {
-            font-size: 22px;
-            font-weight: 600;
-            margin-top: 32px;
-            margin-bottom: 16px;
-            color: #1a1a1a;
-        }
-
-        .article-content p {
-            margin-bottom: 20px;
-        }
-
-        .article-content ul {
-            margin-bottom: 20px;
-            margin-left: 20px;
-        }
-
-        .article-content li {
-            margin-bottom: 12px;
-            line-height: 1.8;
-        }
-
-        .key-stat {
-            background: #f8f9fa;
-            border-left: 4px solid #e74c3c;
-            padding: 20px;
-            margin: 30px 0;
-            font-size: 18px;
-            color: #1a1a1a;
-        }
-
-        .key-stat strong {
-            color: #e74c3c;
-            font-size: 24px;
-        }
-
-        .tech-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
-            margin: 30px 0;
-        }
-
-        .tech-card {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 24px;
-            border: 1px solid #e5e5e5;
-        }
-
-        .tech-card h4 {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 12px;
-            color: #1a1a1a;
-        }
-
-        .tech-card p {
-            font-size: 15px;
-            color: #666;
-            line-height: 1.6;
-            margin: 0;
-        }
-
-        .article-cta {
-            background: #fef5f5;
-            border-radius: 12px;
-            padding: 32px;
-            margin-top: 48px;
-            text-align: center;
-        }
-
-        .article-cta h3 {
-            font-size: 24px;
-            margin-bottom: 12px;
-            color: #1a1a1a;
-        }
-
-        .article-cta p {
-            color: #666;
-            margin-bottom: 24px;
-        }
-
-        .cta-button {
-            background: #e74c3c;
-            color: white;
-            padding: 14px 32px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: 500;
-            display: inline-block;
-            transition: all 0.2s;
-            cursor: pointer;
-            border: none;
-            font-family: inherit;
-        }
-
-        .cta-button:hover {
-            background: #c0392b;
-            transform: translateY(-2px);
-        }
-
-        /* Research Areas */
-        .research-areas {
-            padding: 80px 20px;
-            background: #f8f9fa;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .section-title {
-            font-size: 36px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: #1a1a1a;
-        }
-
-        .section-subtitle {
-            font-size: 18px;
-            color: #666;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .research-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-        }
-
-        .research-card {
-            background: white;
-            border-radius: 12px;
-            padding: 40px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-
-        .research-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-        }
-
-        .research-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #fee, #fcc);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-            font-size: 28px;
-        }
-
-        .research-title {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 12px;
-            color: #1a1a1a;
-        }
-
-        .research-description {
-            color: #666;
-            line-height: 1.6;
-        }
-
-        /* Footer */
-        .footer {
-            background: #1a1a1a;
-            color: white;
-            padding: 60px 20px 40px;
-            text-align: center;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .footer-logo {
-            font-size: 20px;
-            font-weight: 800;
-            margin-bottom: 20px;
-            letter-spacing: -0.5px;
-        }
-
-        .footer-logo .pro, .footer-logo .acti {
-            color: #0066cc;
-        }
-
-        .footer-logo .va {
-            color: #e74c3c;
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 40px;
-            justify-content: center;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-        }
-
-        .footer-link {
-            color: #999;
-            text-decoration: none;
-            transition: color 0.2s;
-            cursor: pointer;
-        }
-
-        .footer-link:hover {
-            color: white;
-        }
-
-        .footer-divider {
-            height: 1px;
-            background: #333;
-            margin: 40px 0;
-        }
-
-        .footer-bottom {
-            color: #666;
-            font-size: 14px;
-        }
-
-        /* Modal Close Button */
-        .modal-close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 32px;
-            height: 32px;
-            background: #f8f9fa;
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            color: #666;
-            transition: all 0.2s;
-        }
-
-        .modal-close:hover {
-            background: #e9ecef;
-            color: #333;
-        }
-
-        /* Access Modal */
-        .access-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.8);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
-            backdrop-filter: blur(5px);
-            padding: 20px;
-        }
-
-        .access-modal {
-            background: white;
-            border-radius: 16px;
-            padding: 40px;
-            max-width: 400px;
-            width: 100%;
-            text-align: center;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            position: relative;
-        }
-        
-
-        .access-icon {
-            font-size: 48px;
-            margin-bottom: 20px;
-        }
-
-        .access-title {
-            font-size: 24px;
-            font-weight: 600;
-            margin-bottom: 12px;
-        }
-
-        .access-text {
-            color: #666;
-            margin-bottom: 24px;
-        }
-
-        /* Email Signup Form */
-        .signup-form {
-            display: none;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-            text-align: left;
-        }
-
-        .form-label {
-            display: block;
-            font-size: 14px;
-            font-weight: 500;
-            margin-bottom: 8px;
-            color: #333;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 12px 16px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 16px;
-            font-family: inherit;
-            transition: border-color 0.2s;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: #e74c3c;
-        }
-
-        .form-submit {
-            background: #e74c3c;
-            color: white;
-            padding: 12px 32px;
-            border-radius: 8px;
-            border: none;
-            font-size: 16px;
-            font-weight: 500;
-            cursor: pointer;
-            width: 100%;
-            transition: all 0.2s;
-        }
-
-        .form-submit:hover {
-            background: #c0392b;
-            transform: translateY(-1px);
-        }
-
-        .form-submit:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .form-note {
-            font-size: 13px;
-            color: #666;
-            margin-top: 16px;
-        }
-
-        .success-message {
-            display: none;
-            color: #27ae60;
-            font-weight: 500;
-            margin-bottom: 20px;
-        }
-
-        .error-message {
-            display: none;
-            color: #e74c3c;
-            font-weight: 500;
-            margin-bottom: 20px;
-        }
-
-        .back-link {
-            color: #0066cc;
-            text-decoration: none;
-            font-size: 14px;
-            cursor: pointer;
-            display: inline-block;
-            margin-top: 16px;
-            background: none;
-            border: none;
-            padding: 0;
-            font-family: inherit;
-        }
-
-        .back-link:hover {
-            text-decoration: underline;
-        }
-
-
-        /* Login Form */
-        .login-form {
-            display: none;
-        }
-
-        .login-error {
-            display: none;
-            color: #e74c3c;
-            font-size: 14px;
-            margin-bottom: 16px;
-            text-align: center;
-        }
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            .hero {
-                padding: 40px 20px 30px;
-            }
-
-            .hero h1 {
-                font-size: 32px;
-            }
-
-            .article-title {
-                font-size: 28px;
-            }
-
-            .hero-subtitle {
-                font-size: 18px;
-            }
-
-            .featured-article {
-                padding: 40px 20px;
-            }
-
-            .article-content {
-                font-size: 16px;
-            }
-
-            .article-content h2 {
-                font-size: 24px;
-            }
-
-            .article-content h3 {
-                font-size: 20px;
-            }
-
-            .tech-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .research-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .research-areas {
-                padding: 60px 20px;
-            }
-
-            .section-title {
-                font-size: 28px;
-            }
-
-            .footer {
-                padding: 40px 20px;
-            }
-
-            .footer-links {
-                flex-direction: column;
-                gap: 16px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 28px;
-            }
-
-            .article-title {
-                font-size: 24px;
-            }
-
-            .research-card {
-                padding: 30px;
-            }
-
-            .access-modal {
-                padding: 30px 20px;
-            }
-        }
-
-        /* Print styles */
-        @media print {
-            .header, .footer, .cta-button, .research-areas {
-                display: none;
-            }
-
-            .article-content {
-                color: #000;
-            }
-        }
-    </style>
-</head>
+    </head>
 <body>
     <!-- Header -->
     <header class="header" role="banner">
@@ -789,13 +27,13 @@
                 <span class="pro">PRO</span><span class="acti">ACTI</span><span class="va">VA</span>
             </a>
             <nav class="nav-links" role="navigation" aria-label="Main navigation">
-                <span class="nav-link" onclick="scrollToSection('research')" role="button" tabindex="0" onkeypress="handleKeyPress(event, () => scrollToSection('research'))" aria-label="Navigate to Research Areas section">Research Areas</span>
-                <span class="nav-link" onclick="showAccessModal()" role="button" tabindex="0" onkeypress="handleKeyPress(event, showAccessModal)" aria-label="Access Publications">Publications</span>
-                <span class="nav-link" onclick="showAccessModal()" role="button" tabindex="0" onkeypress="handleKeyPress(event, showAccessModal)" aria-label="Access Data & Insights">Data & Insights</span>
-                <span class="nav-link" onclick="showAccessModal()" role="button" tabindex="0" onkeypress="handleKeyPress(event, showAccessModal)" aria-label="About PROACTIVA">About</span>
-                <button class="login-btn" onclick="showLoginModal()" aria-label="Member Login">Member Login</button>
+                <a href="#research" class="nav-link" aria-label="Navigate to Research Areas section">Research Areas</a>
+                <a href="#" class="nav-link" aria-label="Access Publications">Publications</a>
+                <a href="#" class="nav-link" aria-label="Access Data & Insights">Data & Insights</a>
+                <a href="#" class="nav-link" aria-label="About PROACTIVA">About</a>
+                <button class="login-btn" aria-label="Member Login">Member Login</button>
             </nav>
-            <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Toggle mobile menu" aria-expanded="false" id="mobileMenuBtn">
+            <button class="mobile-menu-btn" aria-label="Toggle mobile menu" aria-expanded="false" id="mobileMenuBtn">
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
@@ -805,11 +43,11 @@
         <!-- Mobile Menu -->
         <div class="mobile-menu" id="mobileMenu">
             <nav class="mobile-menu-links" role="navigation" aria-label="Mobile navigation">
-                <span class="mobile-menu-link" onclick="scrollToSection('research'); toggleMobileMenu();" role="button" tabindex="0" onkeypress="handleKeyPress(event, () => { scrollToSection('research'); toggleMobileMenu(); })" aria-label="Navigate to Research Areas section">Research Areas</span>
-                <span class="mobile-menu-link" onclick="showAccessModal(); toggleMobileMenu();" role="button" tabindex="0" onkeypress="handleKeyPress(event, () => { showAccessModal(); toggleMobileMenu(); })" aria-label="Access Publications">Publications</span>
-                <span class="mobile-menu-link" onclick="showAccessModal(); toggleMobileMenu();" role="button" tabindex="0" onkeypress="handleKeyPress(event, () => { showAccessModal(); toggleMobileMenu(); })" aria-label="Access Data & Insights">Data & Insights</span>
-                <span class="mobile-menu-link" onclick="showAccessModal(); toggleMobileMenu();" role="button" tabindex="0" onkeypress="handleKeyPress(event, () => { showAccessModal(); toggleMobileMenu(); })" aria-label="About PROACTIVA">About</span>
-                <button class="mobile-login-btn" onclick="showLoginModal(); toggleMobileMenu();" aria-label="Member Login">Member Login</button>
+                <span class="mobile-menu-link" aria-label="Navigate to Research Areas section">Research Areas</span>
+                <span class="mobile-menu-link" aria-label="Access Publications">Publications</span>
+                <span class="mobile-menu-link" aria-label="Access Data & Insights">Data & Insights</span>
+                <span class="mobile-menu-link" aria-label="About PROACTIVA">About</span>
+                <button class="mobile-login-btn" aria-label="Member Login">Member Login</button>
             </nav>
         </div>
     </header>
@@ -1011,21 +249,139 @@
     <!-- Footer -->
     <footer class="footer" role="contentinfo">
         <div class="footer-content">
-            <div class="footer-logo" aria-label="PROACTIVA Research Hub">
+            <div class="footer-logo" aria-label="PROACTIVA">
                 <span class="pro">PRO</span><span class="acti">ACTI</span><span class="va">VA</span>
             </div>
-            <nav class="footer-links" role="navigation" aria-label="Footer navigation">
-                <span class="footer-link" onclick="showAccessModal()" role="button" tabindex="0" onkeypress="handleKeyPress(event, showAccessModal)" aria-label="About Proactiva">About Proactiva</span>
-                <span class="footer-link" onclick="showAccessModal()" role="button" tabindex="0" onkeypress="handleKeyPress(event, showAccessModal)" aria-label="Research Methodology">Methodology</span>
-                <span class="footer-link" onclick="showAccessModal()" role="button" tabindex="0" onkeypress="handleKeyPress(event, showAccessModal)" aria-label="Contact Information">Contact</span>
-                <span class="footer-link" onclick="showAccessModal()" role="button" tabindex="0" onkeypress="handleKeyPress(event, showAccessModal)" aria-label="Privacy Policy">Privacy</span>
-            </nav>
-            <div class="footer-divider" aria-hidden="true"></div>
             <div class="footer-bottom">
                 <small>© 2025 Proactiva LLC. All research and data are proprietary.</small>
             </div>
         </div>
     </footer>
+
+    <!-- Access Required Modal -->
+    <div class="access-overlay" id="accessModal" role="dialog" aria-labelledby="access-title" aria-modal="true">
+        <div class="access-modal">
+            <button class="modal-close" onclick="hideAccessModal()" aria-label="Close modal">×</button>
+            <div id="modalContent">
+                <div class="access-icon" aria-hidden="true">🔒</div>
+                <h3 class="access-title" id="access-title">Access Required</h3>
+                <p class="access-text">
+                    Full research reports, data sets, and strategic insights are available exclusively to Proactiva members and partners.
+                </p>
+                <button class="cta-button" onclick="showSignupForm()">Request Access</button>
+            </div>
+            
+            <div class="signup-form" id="signupForm">
+                <h3 class="access-title">Request Access</h3>
+                <div class="success-message" id="successMessage" role="status" aria-live="polite" style="color: #0066cc;">We'll review and contact you soon!</div>
+                <div class="error-message" id="errorMessage" role="alert" aria-live="assertive">Please fill in all required fields.</div>
+                
+                <form id="accessForm" onsubmit="handleFormSubmit(event)" novalidate>
+                    <div class="form-group">
+                        <label class="form-label" for="name">Full Name *</label>
+                        <input type="text" id="name" name="name" class="form-input" required aria-describedby="name-error" autocomplete="name">
+                        <div id="name-error" class="field-error" role="alert" aria-live="polite"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" class="form-input" required aria-describedby="email-error" autocomplete="email">
+                        <div id="email-error" class="field-error" role="alert" aria-live="polite"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="organization">Organization</label>
+                        <input type="text" id="organization" name="organization" class="form-input" autocomplete="organization">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="role">Role/Title</label>
+                        <input type="text" id="role" name="role" class="form-input" autocomplete="organization-title">
+                    </div>
+                    
+                    <button type="submit" class="form-submit" id="submitBtn">Submit Request</button>
+                    
+                    <p class="form-note">
+                        We respect your privacy. Your information will only be used to evaluate your access request.
+                    </p>
+                </form>
+                
+                <button class="back-link" id="signupBackBtn" onclick="hideSignupForm()" type="button">← Back</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="access-overlay" id="loginModal" role="dialog" aria-labelledby="login-title" aria-modal="true">
+        <div class="access-modal">
+            <button class="modal-close" onclick="hideLoginModal()" aria-label="Close login modal">×</button>
+            <div class="login-form" id="loginForm" style="display: block;">
+                <h3 class="access-title" id="login-title">Member Login</h3>
+                <div class="login-error" id="loginError" role="alert" aria-live="polite">Invalid credentials. Please try again.</div>
+                
+                <form onsubmit="handleLogin(event)" novalidate>
+                    <div class="form-group">
+                        <label class="form-label" for="loginUsername">Username</label>
+                        <input type="text" id="loginUsername" name="loginUsername" class="form-input" required autocomplete="username" aria-describedby="login-error">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" name="loginPassword" class="form-input" required autocomplete="current-password" aria-describedby="login-error">
+                    </div>
+                    
+                    <button type="submit" class="form-submit">Login</button>
+                    
+                    <p class="form-note" style="margin-top: 20px;">
+                        Not a member? <button type="button" onclick="showAccessModal()" style="color: #e74c3c; background: none; border: none; text-decoration: underline; cursor: pointer;">Request access</button>
+                    </p>
+                </form>
+                
+                <button class="back-link" onclick="hideLoginModal()" type="button">← Back</button>
+            </div>
+            
+            <div class="admin-dashboard" id="adminDashboard" role="main">
+                <div class="dashboard-header">
+                    <div class="dashboard-logo">
+                        <span class="pro">PRO</span><span class="acti">ACTI</span><span class="va">VA</span>
+                    </div>
+                    <h2 class="dashboard-title">Communications Dashboard</h2>
+                </div>
+                
+                <div class="dashboard-stats" id="dashboardStats">
+                    <!-- Stats will be populated by JavaScript -->
+                </div>
+                
+                <div id="submissionsContent" role="region" aria-label="Submissions data">
+                    <!-- Content will be populated by JavaScript -->
+                </div>
+                
+                <div class="dashboard-actions">
+                    <button class="dashboard-btn download-btn" onclick="downloadSubmissionsCSV()" aria-label="Download submissions as CSV file">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 8px;">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        Download CSV
+                    </button>
+                    <button class="dashboard-btn clear-btn" onclick="clearAllSubmissions()" aria-label="Clear all submission data">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 8px;">
+                            <polyline points="3 6 5 6 21 6"></polyline>
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                        </svg>
+                        Clear All Data
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/shared-scripts.js"></script>
+    <script src="/dashboard.js"></script>
+    
+</body>
+</html>
 
     <!-- Access Required Modal -->
     <div class="access-overlay" id="accessModal" role="dialog" aria-labelledby="access-title" aria-modal="true">
@@ -1151,433 +507,5 @@
     <script src="/shared-scripts.js"></script>
     <script src="/dashboard.js"></script>
     
-    <script>
-        // Mobile menu toggle functionality
-        function toggleMobileMenu() {
-            const mobileMenu = document.getElementById('mobileMenu');
-            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-            
-            if (!mobileMenu || !mobileMenuBtn) {
-                console.error('Mobile menu elements not found');
-                return;
-            }
-            
-            // Toggle menu visibility
-            const isActive = mobileMenu.classList.contains('active');
-            
-            if (isActive) {
-                // Close menu
-                mobileMenu.classList.remove('active');
-                mobileMenuBtn.classList.remove('active');
-                mobileMenuBtn.setAttribute('aria-expanded', 'false');
-                document.body.style.overflow = 'auto';
-            } else {
-                // Open menu
-                mobileMenu.classList.add('active');
-                mobileMenuBtn.classList.add('active');
-                mobileMenuBtn.setAttribute('aria-expanded', 'true');
-                document.body.style.overflow = 'hidden';
-                
-                // Focus first menu item for accessibility
-                setTimeout(() => {
-                    const firstMenuItem = mobileMenu.querySelector('.mobile-menu-link');
-                    if (firstMenuItem) {
-                        firstMenuItem.focus();
-                    }
-                }, 100);
-            }
-        }
-        
-        // Close mobile menu when clicking outside
-        function handleOutsideClick(event) {
-            const mobileMenu = document.getElementById('mobileMenu');
-            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-            
-            if (mobileMenu && mobileMenuBtn && 
-                mobileMenu.classList.contains('active') &&
-                !mobileMenu.contains(event.target) && 
-                !mobileMenuBtn.contains(event.target)) {
-                toggleMobileMenu();
-            }
-        }
-        
-        // Close mobile menu on escape key
-        function handleMobileMenuEscape(event) {
-            if (event.key === 'Escape') {
-                const mobileMenu = document.getElementById('mobileMenu');
-                if (mobileMenu && mobileMenu.classList.contains('active')) {
-                    toggleMobileMenu();
-                }
-            }
-        }
-
-        // Prevent form resubmission on page refresh
-        if (window.history.replaceState) {
-            window.history.replaceState(null, null, window.location.href);
-        }
-
-        // Smooth scrolling
-        function scrollToSection(sectionId) {
-            const section = document.getElementById(sectionId);
-            if (section) {
-                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        }
-
-        function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        
-
-        // Enhanced form handling system
-        const FormHandler = {
-            // Validate email format
-            isValidEmail(email) {
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                return emailRegex.test(email);
-            },
-            
-            // Sanitize input data
-            sanitizeData(data) {
-                const sanitized = {};
-                for (const [key, value] of Object.entries(data)) {
-                    if (typeof value === 'string') {
-                        // Remove potentially harmful characters and trim whitespace
-                        sanitized[key] = value.trim().replace(/[<>"'&]/g, '');
-                    } else {
-                        sanitized[key] = value;
-                    }
-                }
-                return sanitized;
-            },
-            
-            // Validate form data
-            validateFormData(data) {
-                const errors = [];
-                
-                if (!data.name || data.name.length < 2) {
-                    errors.push('Name must be at least 2 characters long');
-                }
-                
-                if (!data.email) {
-                    errors.push('Email address is required');
-                } else if (!this.isValidEmail(data.email)) {
-                    errors.push('Please enter a valid email address');
-                }
-                
-                if (data.name && data.name.length > 100) {
-                    errors.push('Name is too long (maximum 100 characters)');
-                }
-                
-                if (data.organization && data.organization.length > 200) {
-                    errors.push('Organization name is too long (maximum 200 characters)');
-                }
-                
-                if (data.role && data.role.length > 200) {
-                    errors.push('Role is too long (maximum 200 characters)');
-                }
-                
-                return errors;
-            },
-            
-            // Save submission to localStorage
-            saveSubmission(data) {
-                try {
-                    let submissions = JSON.parse(localStorage.getItem('proactivaSubmissions') || '[]');
-                    
-                    // Check for duplicate submissions (same email within last hour)
-                    const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000);
-                    const isDuplicate = submissions.some(sub => 
-                        sub.email === data.email && 
-                        new Date(sub.timestamp) > oneHourAgo
-                    );
-                    
-                    if (isDuplicate) {
-                        // Show success message even for duplicates
-                        return true;
-                    }
-                    
-                    submissions.push(data);
-                    localStorage.setItem('proactivaSubmissions', JSON.stringify(submissions));
-                    return true;
-                } catch (error) {
-                    console.error('Error saving submission:', error);
-                    throw error;
-                }
-            },
-            
-            // Handle form submission
-            async handleSubmit(event) {
-                event.preventDefault();
-                
-                const form = event.target;
-                const submitBtn = document.getElementById('submitBtn');
-                const successMsg = document.getElementById('successMessage');
-                const errorMsg = document.getElementById('errorMessage');
-                
-                // Reset messages
-                if (successMsg) successMsg.style.display = 'none';
-                if (errorMsg) errorMsg.style.display = 'none';
-                
-                try {
-                    // Show loading state
-                    if (submitBtn) {
-                        submitBtn.disabled = true;
-                        submitBtn.textContent = 'Submitting...';
-                    }
-                    
-                    // Get and sanitize form data
-                    const formData = new FormData(form);
-                    let data = {
-                        name: formData.get('name'),
-                        email: formData.get('email'),
-                        organization: formData.get('organization'),
-                        role: formData.get('role'),
-                        timestamp: new Date().toISOString(),
-                        userAgent: navigator.userAgent,
-                        referrer: document.referrer || 'Direct'
-                    };
-                    
-                    data = this.sanitizeData(data);
-                    
-                    // Validate data
-                    const validationErrors = this.validateFormData(data);
-                    if (validationErrors.length > 0) {
-                        throw new Error(validationErrors[0]); // Show first error
-                    }
-                    
-                    // Simulate network delay for better UX
-                    await new Promise(resolve => setTimeout(resolve, 800));
-                    
-                    // Save submission
-                    this.saveSubmission(data);
-                    
-                    // Create email body for potential manual sending
-                    const emailBody = `New Access Request from PROACTIVA Research Hub\n\n` +
-                        `Name: ${data.name}\n` +
-                        `Email: ${data.email}\n` +
-                        `Organization: ${data.organization || 'Not provided'}\n` +
-                        `Role: ${data.role || 'Not provided'}\n` +
-                        `Submitted: ${data.timestamp}`;
-                    
-                    // Show success message with checkmark
-                    if (successMsg) {
-                        successMsg.style.display = 'block';
-                        successMsg.innerHTML = '<div style="font-size: 48px; color: #27ae60; margin-bottom: 20px; text-align: center;">✓</div>We\'ll review and contact you soon!';
-                        successMsg.style.color = '#0066cc'; // Change to blue
-                        successMsg.style.textAlign = 'center';
-                    }
-                    if (form) form.style.display = 'none';
-                    
-                    // Change the "Request Access" title to "Success!"
-                    const accessTitle = document.querySelector('#signupForm .access-title');
-                    if (accessTitle) {
-                        accessTitle.textContent = 'Success!';
-                        accessTitle.style.display = 'block';
-                        accessTitle.style.textAlign = 'center';
-                    }
-                    
-                    // Change back button to close entire modal after success
-                    const backBtn = document.getElementById('signupBackBtn');
-                    if (backBtn) {
-                        backBtn.onclick = function() { hideAccessModal(); };
-                    }
-                    
-                    // Log for debugging
-                    console.log('Access request submitted successfully:', data);
-                    
-                } catch (error) {
-                    // Show error message
-                    if (errorMsg) {
-                        errorMsg.style.display = 'block';
-                        errorMsg.textContent = error.message || 'An error occurred. Please try again.';
-                    }
-                    console.error('Form submission error:', error);
-                } finally {
-                    // Reset submit button
-                    if (submitBtn) {
-                        submitBtn.disabled = false;
-                        submitBtn.textContent = 'Submit Request';
-                    }
-                }
-            }
-        };
-        
-        // Form submission handler
-        function handleFormSubmit(event) {
-            FormHandler.handleSubmit(event);
-        }
-        
-        // Legacy admin functions - kept for console access
-        function viewSubmissions() {
-            const submissions = JSON.parse(localStorage.getItem('proactivaSubmissions') || '[]');
-            console.table(submissions);
-            return submissions;
-        }
-        
-
-
-        
-        
-
-        
-
-
-
-
-        // Initialize the application when DOM is ready
-        function initializeApp() {
-            // Modal system is now initialized by shared-scripts.js
-            
-            // Initialize mobile menu event listeners
-            document.addEventListener('click', handleOutsideClick);
-            document.addEventListener('keydown', handleMobileMenuEscape);
-            
-            // Add form validation event listeners
-            const accessForm = document.getElementById('accessForm');
-            if (accessForm) {
-                // Real-time validation
-                const nameInput = document.getElementById('name');
-                const emailInput = document.getElementById('email');
-                
-                if (nameInput) {
-                    nameInput.addEventListener('input', function() {
-                        if (this.value.length > 0 && this.value.length < 2) {
-                            this.setCustomValidity('Name must be at least 2 characters long');
-                        } else if (this.value.length > 100) {
-                            this.setCustomValidity('Name is too long (maximum 100 characters)');
-                        } else {
-                            this.setCustomValidity('');
-                        }
-                    });
-                }
-                
-                if (emailInput) {
-                    emailInput.addEventListener('input', function() {
-                        if (this.value && !FormHandler.isValidEmail(this.value)) {
-                            this.setCustomValidity('Please enter a valid email address');
-                        } else {
-                            this.setCustomValidity('');
-                        }
-                    });
-                }
-            }
-            
-            console.log('PROACTIVA Research Hub application initialized successfully');
-        }
-        
-        // Keyboard navigation helper
-        function handleKeyPress(event, callback) {
-            if (event.key === 'Enter' || event.key === ' ') {
-                event.preventDefault();
-                callback();
-            }
-        }
-        
-        // Performance monitoring
-        const PerformanceMonitor = {
-            init() {
-                // Measure and log performance metrics
-                if ('performance' in window) {
-                    window.addEventListener('load', () => {
-                        setTimeout(() => {
-                            const perfData = performance.getEntriesByType('navigation')[0];
-                            console.log('Page Load Performance:', {
-                                domContentLoaded: perfData.domContentLoadedEventEnd - perfData.domContentLoadedEventStart,
-                                loadComplete: perfData.loadEventEnd - perfData.loadEventStart,
-                                totalTime: perfData.loadEventEnd - perfData.fetchStart
-                            });
-                        }, 0);
-                    });
-                }
-            }
-        };
-        
-        // Enhanced initialization with accessibility and performance
-        function initializeAppWithOptimizations() {
-            // Add skip link for accessibility
-            const skipLink = document.createElement('a');
-            skipLink.href = '#article';
-            skipLink.className = 'skip-link';
-            skipLink.textContent = 'Skip to main content';
-            document.body.insertBefore(skipLink, document.body.firstChild);
-            
-            // Initialize existing app
-            initializeApp();
-            
-            // Initialize performance monitoring
-            PerformanceMonitor.init();
-            
-            // Enhanced form validation
-            const accessForm = document.getElementById('accessForm');
-            if (accessForm) {
-                const nameInput = document.getElementById('name');
-                const emailInput = document.getElementById('email');
-                const nameError = document.getElementById('name-error');
-                const emailError = document.getElementById('email-error');
-                
-                if (nameInput && nameError) {
-                    nameInput.addEventListener('input', function() {
-                        const value = this.value.trim();
-                        let errorMsg = '';
-                        
-                        if (value.length > 0 && value.length < 2) {
-                            errorMsg = 'Name must be at least 2 characters long';
-                        } else if (value.length > 100) {
-                            errorMsg = 'Name is too long (maximum 100 characters)';
-                        }
-                        
-                        if (errorMsg) {
-                            this.setCustomValidity(errorMsg);
-                            nameError.textContent = errorMsg;
-                            nameError.classList.add('show');
-                        } else {
-                            this.setCustomValidity('');
-                            nameError.classList.remove('show');
-                        }
-                    });
-                }
-                
-                if (emailInput && emailError) {
-                    emailInput.addEventListener('input', function() {
-                        const value = this.value.trim();
-                        let errorMsg = '';
-                        
-                        if (value && !FormHandler.isValidEmail(value)) {
-                            errorMsg = 'Please enter a valid email address';
-                        }
-                        
-                        if (errorMsg) {
-                            this.setCustomValidity(errorMsg);
-                            emailError.textContent = errorMsg;
-                            emailError.classList.add('show');
-                        } else {
-                            this.setCustomValidity('');
-                            emailError.classList.remove('show');
-                        }
-                    });
-                }
-            }
-            
-            console.log('PROACTIVA Research Hub fully optimized and initialized');
-        }
-        
-        // Initialize when DOM is ready
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initializeAppWithOptimizations);
-        } else {
-            initializeAppWithOptimizations();
-        }
-        
-        // Error handling
-        window.addEventListener('error', (event) => {
-            console.error('JavaScript error:', event.error);
-        });
-        
-        window.addEventListener('unhandledrejection', (event) => {
-            console.error('Unhandled promise rejection:', event.reason);
-        });
-    </script>
-</body>
+    </body>
 </html>

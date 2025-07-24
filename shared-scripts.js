@@ -525,7 +525,13 @@ function initializeProactiva() {
         window.proactivaModal.showSignupForm();
     };
     window.hideAccessModal = () => window.proactivaModal.hide('accessModal');
-    window.showLoginModal = () => window.proactivaModal.show('loginModal');
+    window.showLoginModal = () => {
+        const loginError = document.getElementById('loginError');
+        if (loginError) {
+            loginError.style.display = 'none';
+        }
+        window.proactivaModal.show('loginModal');
+    };
     window.hideLoginModal = () => {
         const loginModal = document.getElementById('loginModal');
         if (loginModal && loginModal.classList.contains('dashboard-mode')) {
@@ -534,9 +540,33 @@ function initializeProactiva() {
             window.proactivaModal.hide('loginModal');
         }
     };
+    window.showContactModal = () => window.proactivaModal.show('contactModal');
+    window.hideContactModal = () => window.proactivaModal.hide('contactModal');
     window.toggleMobileMenu = () => window.proactivaMobileMenu.toggle();
     window.handleLogin = (event) => window.proactivaLoginHandler.handleLogin(event);
     window.logout = () => window.proactivaLoginHandler.logout();
+
+    // Add event listeners for unobtrusive JavaScript
+    document.querySelectorAll('.contact-link').forEach(btn => btn.addEventListener('click', () => window.showContactModal()));
+    document.querySelectorAll('.modal-close').forEach(btn => btn.addEventListener('click', () => window.proactivaModal.hide(btn.closest('.access-overlay, .contact-overlay').id)));
+    document.querySelectorAll('.login-btn').forEach(btn => btn.addEventListener('click', () => window.showLoginModal()));
+    document.querySelectorAll('.nav-link[onclick*="showAccessModal"]').forEach(btn => btn.addEventListener('click', () => window.showAccessModal()));
+    document.querySelectorAll('.cta-button[onclick*="showAccessModal"]').forEach(btn => btn.addEventListener('click', () => window.showAccessModal()));
+    document.querySelectorAll('.research-card').forEach(card => card.addEventListener('click', () => window.showAccessModal()));
+    document.querySelectorAll('#contactForm').forEach(form => form.addEventListener('submit', (e) => handleContactSubmit(e)));
+    document.querySelectorAll('#accessForm').forEach(form => form.addEventListener('submit', (e) => handleFormSubmit(e)));
+    document.querySelectorAll('.mobile-menu-btn').forEach(btn => btn.addEventListener('click', () => window.toggleMobileMenu()));
+    document.querySelectorAll('.nav-link[onclick*="scrollToSection"]').forEach(btn => btn.addEventListener('click', () => scrollToSection('research')));
+    document.querySelectorAll('.mobile-menu-link[onclick*="scrollToSection"]').forEach(btn => btn.addEventListener('click', () => { scrollToSection('research'); window.toggleMobileMenu(); }));
+    document.querySelectorAll('.mobile-menu-link[onclick*="showAccessModal"]').forEach(btn => btn.addEventListener('click', () => { window.showAccessModal(); window.toggleMobileMenu(); }));
+    document.querySelectorAll('.mobile-login-btn').forEach(btn => btn.addEventListener('click', () => { window.showLoginModal(); window.toggleMobileMenu(); }));
+    document.querySelectorAll('#signupBackBtn').forEach(btn => btn.addEventListener('click', () => {
+        const modalContent = document.getElementById('modalContent');
+        const signupForm = document.getElementById('signupForm');
+        if(modalContent) modalContent.style.display = 'block';
+        if(signupForm) signupForm.style.display = 'none';
+    }));
+
 
     console.log('PROACTIVA core systems initialized');
 }
@@ -557,4 +587,86 @@ if (typeof module !== 'undefined' && module.exports) {
         ProactivaLoginHandler,
         ProactivaUtils
     };
+}
+
+// Legacy functions for research pages
+function scrollToSection(sectionId) {
+    ProactivaUtils.scrollToElement(sectionId, 80); // 80px offset for header
+}
+
+async function handleFormSubmit(event) {
+    event.preventDefault();
+    const form = event.target;
+    const submitBtn = form.querySelector('button[type="submit"]');
+    
+    const formData = {
+        name: form.name.value,
+        email: form.email.value,
+        organization: form.organization.value,
+        role: form.role.value
+    };
+
+    const validation = window.proactivaFormHandler.validateForm(formData, ['name', 'email']);
+
+    if (!validation.isValid) {
+        window.proactivaFormHandler.showErrors(validation.errors);
+        return;
+    }
+
+    if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Submitting...';
+    }
+
+    const result = await window.proactivaFormHandler.submitForm(formData, 'accessRequest');
+
+    if (result.success) {
+        window.proactivaFormHandler.showSuccess('We will review your request and contact you shortly.', 'signupForm');
+    } else {
+        window.proactivaFormHandler.showErrors({ form: result.error });
+    }
+
+    if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit Request';
+    }
+}
+
+async function handleContactSubmit(event) {
+    event.preventDefault();
+    const form = event.target;
+    const submitBtn = form.querySelector('button[type="submit"]');
+    
+    const formData = {
+        name: form.contactName.value,
+        email: form.contactEmail.value,
+        organization: form.contactOrganization.value,
+        subject: form.contactSubject.value,
+        message: form.contactMessage.value
+    };
+
+    const validation = window.proactivaFormHandler.validateForm(formData, ['name', 'email', 'message']);
+
+    if (!validation.isValid) {
+        window.proactivaFormHandler.showErrors(validation.errors);
+        return;
+    }
+
+    if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+    }
+
+    const result = await window.proactivaFormHandler.submitForm(formData, 'contact');
+
+    if (result.success) {
+        window.proactivaFormHandler.showSuccess('Thank you for your message! We will be in touch shortly.', 'contactForm');
+    } else {
+        window.proactivaFormHandler.showErrors({ form: result.error });
+    }
+
+    if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Message';
+    }
 }
